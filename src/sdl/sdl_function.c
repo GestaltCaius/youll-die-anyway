@@ -68,15 +68,15 @@ bool init_window(struct game_state *gs)
     gs->win->textures->background =
     loadTexture("src/ressource/png_texture/background.png",gs);
     gs->win->textures->stone =
+    loadTexture("src/ressource/png_texture/stone.png",gs);
+    gs->win->textures->hero =
+    loadTexture("src/ressource/png_texture/hero.png",gs);
+    gs->win->textures->rock =
     loadTexture("src/ressource/png_texture/rock.png",gs);
-    gs->win->textures->player =
-    loadTexture("src/ressource/png_texture/rock.png",gs);
-    gs->win->textures->player =
-    loadTexture("src/ressource/png_texture/rock.png",gs);
-    gs->win->textures->player =
-    loadTexture("src/ressource/png_texture/rock.png",gs);
-    gs->win->textures->player =
-    loadTexture("src/ressource/png_texture/rock.png",gs);
+    gs->win->textures->groomf =
+    loadTexture("src/ressource/png_texture/groomf.png",gs);
+    gs->win->textures->spike =
+    loadTexture("src/ressource/png_texture/spike.png",gs);
     return true;
 }
 
