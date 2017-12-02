@@ -10,7 +10,7 @@ struct game_state
     struct player *player;
     struct entity_list *list;
     struct map *map;
-    struct window *win;
+    struct mywindow *win;
 };
 
 struct game_state *game_state_create(void);

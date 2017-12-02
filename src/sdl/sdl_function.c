@@ -1,28 +1,34 @@
 #include "sdl.h"
 
 
-void init_mywindow(void)
+void init_mywindow(struct game_state * gs)
 {
-    w = malloc(sizeof(struct mywindow));
-    w->window = NULL;
-    w->window_surface = NULL;
-    w->bg_surface = NULL;
-    w->renderer = NULL;
-    w->texture = NULL;
+    gs->win = malloc(sizeof(struct mywindow));
+    gs->win->window = NULL;
+    gs->win->window_surface = NULL;
+    gs->win->bg_surface = NULL;
+    gs->win->renderer = NULL;
+    gs->win->textures = malloc(sizeof(struct textures));
 }
 
-void close_sdl(void)
+void close_sdl(struct game_state *gs)
 {
-    SDL_FreeSurface(w->window_surface);
-    SDL_FreeSurface(w->bg_surface);
-    SDL_DestroyTexture(w->texture);
-    SDL_DestroyRenderer(w->renderer);
-    SDL_DestroyWindow(w->window);
+    SDL_FreeSurface(gs->win->window_surface);
+    SDL_FreeSurface(gs->win->bg_surface);
+    SDL_DestroyTexture(gs->win->textures->air);
+    SDL_DestroyTexture(gs->win->textures->stone);
+    SDL_DestroyTexture(gs->win->textures->player);
+    SDL_DestroyTexture(gs->win->textures->groomf);
+    SDL_DestroyTexture(gs->win->textures->spike);
+    
+    SDL_DestroyRenderer(gs->win->renderer);
+    SDL_DestroyWindow(gs->win->window);
     SDL_Quit();
-    free(w);
+    free(gs->win->textures);
+    free(gs->win);
 }
 
-bool init_window()
+bool init_window(struct game_state *gs)
 {
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
@@ -31,22 +37,22 @@ bool init_window()
     }
     else
     {
-        w->window = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED,
+        gs->win->window = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED,
                 SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
                 SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-        if( w->window == NULL )
+        if( gs->win->window == NULL )
         {
             printf( "Error windows creation! SDL_Error: %s\n", SDL_GetError() );
             return false;
         }
-        w->renderer = SDL_CreateRenderer( w->window, -1,
+        gs->win->renderer = SDL_CreateRenderer( gs->win->window, -1,
                 SDL_RENDERER_ACCELERATED );
-        if( w->renderer == NULL )
+        if( gs->win->renderer == NULL )
         {
             printf( "Renderer not created!SDL Error: %s\n", SDL_GetError());
             return false;
         }
-        SDL_SetRenderDrawColor( w->renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+        SDL_SetRenderDrawColor( gs->win->renderer, 0xFF, 0xFF, 0xFF, 0xFF );
         int imgFlags = IMG_INIT_PNG;
         if( !( IMG_Init( imgFlags ) & imgFlags ) )
         {
@@ -55,10 +61,17 @@ bool init_window()
             return false;
         }
     }
+    
+    // initialization texture
+    gs->win->textures->air =
+    loadTexture("src/ressource/png_texture/background.png",gs);
+    gs->win->textures->stone =
+    loadTexture("src/ressource/png_texture/rock.png",gs);
+
     return true;
 }
 
-SDL_Texture* loadTexture( char* path )
+SDL_Texture* loadTexture( char* path,struct game_state *gs )
 {
     SDL_Texture* newTexture = NULL;
     SDL_Surface* loadedSurface = IMG_Load(path);
@@ -69,7 +82,7 @@ SDL_Texture* loadTexture( char* path )
     }
     else
     {
-        newTexture = SDL_CreateTextureFromSurface( w->renderer, loadedSurface);
+        newTexture = SDL_CreateTextureFromSurface( gs->win->renderer, loadedSurface);
         if( newTexture == NULL )
         {
             printf( "Unable to create texture from %s! SDL Error: %s\n", path,

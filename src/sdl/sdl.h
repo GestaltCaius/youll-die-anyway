@@ -9,8 +9,9 @@
 #ifndef SDL_H
 #define SDL_H
 
-#define SCREEN_WIDTH  640
-#define SCREEN_HEIGHT  480
+#define SCREEN_WIDTH  960
+#define SCREEN_HEIGHT  320
+#define BLOCK_SIZE 32
 
 struct mywindow
 {
@@ -38,12 +39,9 @@ enum color
 };
 
 struct mywindow *w;
-void init_mywindow(void);
-void close_sdl(void);
-SDL_Texture* loadTexture(char* path);
-bool init_window();
-void modif_window();
-bool load_bg(void);
-
+void init_mywindow(struct game_state *gs);
+void close_sdl(struct game_state *gs);
+SDL_Texture* loadTexture(char* path,struct game_state *gs);
+bool init_window(struct game_state *gs);
 
 #endif

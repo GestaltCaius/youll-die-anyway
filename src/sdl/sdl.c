@@ -1,5 +1,6 @@
 #include"sdl.h"
 
+/*
 int main(int argc, char* argv[])
 {
     argc = argc;
@@ -35,14 +36,14 @@ int main(int argc, char* argv[])
         SDL_SetRenderDrawColor( w->renderer, 0xFF, 0xFF, 0xFF, 0xF);
         SDL_RenderClear( w->renderer );
 
-/*        SDL_Rect fillRect = { SCREEN_WIDTH / 4, height_rect,
+        SDL_Rect fillRect = { SCREEN_WIDTH / 4, height_rect,
             SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
         SDL_SetRenderDrawColor( w->renderer, 0xFF, 0x00, 0x00, 0xFF );
         SDL_RenderFillRect( w->renderer, &fillRect );
         SDL_Rect outlineRect = { SCREEN_WIDTH / 6, SCREEN_HEIGHT / 6, 
             SCREEN_WIDTH * 2 / 3, SCREEN_HEIGHT * 2 / 3 };
         SDL_SetRenderDrawColor( w->renderer, 0x00, 0xFF, 0x00, 0xFF );        
-        SDL_RenderDrawRect( w->renderer, &outlineRect );*/
+        SDL_RenderDrawRect( w->renderer, &outlineRect );
 
         SDL_Rect topLeftViewport;
         topLeftViewport.x = 0;
@@ -56,4 +57,4 @@ int main(int argc, char* argv[])
     }
     close_sdl();
     return 0;
-}
+}*/
