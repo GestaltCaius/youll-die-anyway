@@ -1,7 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "game_env.h"
+#include "entity.h"
 
 struct entity_list
 {

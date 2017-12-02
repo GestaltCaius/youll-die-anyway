@@ -1,4 +1,4 @@
-#include "game_env.h"
+#include "entity.h"
 
 struct entity *entity_create(struct pos pos, enum entity_type type)
 {

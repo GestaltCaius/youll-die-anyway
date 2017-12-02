@@ -77,4 +77,6 @@ struct player *player_create(struct pos pos);
  */
 void player_destroy(struct player *player);
 
+struct pos pos_create(float x, float y);
+
 #endif /* GAME_ENV_H */
