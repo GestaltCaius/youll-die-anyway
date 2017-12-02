@@ -10,6 +10,7 @@
  */
 
 #include <stdlib.h>
+#include "util.h"
 
 enum entity_type
 {
@@ -26,12 +27,6 @@ enum direction
     UP,
     DOWN,
     IDLE
-};
-
-struct pos
-{
-    float x;
-    float y;
 };
 
 struct entity

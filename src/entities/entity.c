@@ -28,7 +28,7 @@ struct player *player_create(struct pos pos)
     }
     player->is_alive = 1;
     player->jump = 0;
-    player->dir = IDLE;
+    player->entity->dir = IDLE;
     return player;
 }
 

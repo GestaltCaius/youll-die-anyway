@@ -1,6 +1,8 @@
 #define SPEED 10
 #define GRAVITY 10
 
+#include "game_main.h"
+
 game_move(struct game_state *game_state)
 {
     for (struct entity_list *list = game_state->list; list; list = list->next)

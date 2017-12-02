@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include "parser.h"
+#include "game_main.h"
 
 enum block_type get_block_type(char type, struct pos pos,
                                struct game_state *game_state)

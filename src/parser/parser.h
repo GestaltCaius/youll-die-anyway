@@ -1,7 +1,6 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "game_main.h"
 
 enum block_type
 {

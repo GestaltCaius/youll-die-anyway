@@ -63,7 +63,7 @@ bool init_window(struct game_state *gs)
             return false;
         }
     }
-    
+
     // initialization texture
     gs->win->textures->background =
     loadTexture("src/ressource/png_texture/background.png",gs);
@@ -107,7 +107,7 @@ SDL_Texture* loadTexture( char* path,struct game_state *gs )
 void modif_window()
 {
     w->window_surface= SDL_GetWindowSurface( w->window );
-    SDL_FillRect( w->window_surface, NULL, 
+    SDL_FillRect( w->window_surface, NULL,
             SDL_MapRGB( w->window_surface->format, 60, 60, 60 ) );
     SDL_UpdateWindowSurface( w->window );
 }

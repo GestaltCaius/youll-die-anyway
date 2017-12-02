@@ -42,11 +42,11 @@ void game_window_draw(struct game_state *gs)
 
     // set background texture
     SDL_SetRenderDrawColor(gs->win->renderer, 0xFF, 0xFF,0xFF,0xFF);
-    SDL_RenderClear(SDL_Renderer* renderer);
+    SDL_RenderClear(gs->win->renderer);
 
-    for (size_t x = 0; x < w->w; x++)
+    for (size_t x = 0; x < SCREEN_WIDTH / BLOCK_SIZE; x++)
     {
-        for (size_t y = 0; y < w->h; y++)
+        for (size_t y = 0; y < SCREEN_HEIGHT / BLOCK_SIZE; y++)
         {
             SDL_SetRenderTarget(gs->win->renderer,
                     gs->win->textures->background);

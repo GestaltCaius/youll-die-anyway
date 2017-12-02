@@ -1,3 +1,5 @@
+#include "game_main.h"
+
 game_events(struct game_state *game_state)
 {
     SDL_Event e;
