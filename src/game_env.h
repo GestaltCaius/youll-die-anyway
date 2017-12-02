@@ -14,8 +14,9 @@
 
 enum entity_type
 {
-    TRAP,
-    ENEMY,
+    SPIKE,
+    STONE,
+    GROOMF,
     PLAYER
 };
 
