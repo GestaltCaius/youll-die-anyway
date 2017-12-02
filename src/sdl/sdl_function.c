@@ -81,6 +81,8 @@ SDL_Texture* loadTexture( char* path )
     return newTexture;
 }
 
+
+/*
 void modif_window()
 {
     w->window_surface= SDL_GetWindowSurface( w->window );
@@ -110,4 +112,4 @@ bool load_bg(void)
     SDL_FreeSurface(tmp);
     return returnV;
 }
-
+*/
