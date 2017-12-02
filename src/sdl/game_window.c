@@ -48,16 +48,32 @@ void game_window_draw(struct game_state *gs)
     {
         for (size_t y = 0; y < SCREEN_HEIGHT / BLOCK_SIZE; y++)
         {
-            SDL_SetRenderTarget(gs->win->renderer,
-                    gs->win->textures->background);
-            SDL_Rect block = SDL_RectCreate(x * BLOCK_SIZE, y * BLOCK_SIZE,
-                    BLOCK_SIZE, BLOCK_SIZE);
+            SDL_Rect block;
+            switch( gs->map->block_type[x][y])
+            {
+                case AIR:
 
-            SDL_RenderSetViewport(gs->win->renderer, &block);
-            SDL_RenderCopy(gs->win->renderer,
-                    gs->win->textures->background,
-                    NULL,
-                    &block);
+                    SDL_SetRenderTarget(gs->win->renderer,
+                            gs->win->textures->background);
+                    block = SDL_RectCreate(x * BLOCK_SIZE,
+                            y * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
+
+                    SDL_RenderCopy(gs->win->renderer,
+                            gs->win->textures->background,NULL,&block);
+                    break;
+                case ROCK:
+
+                    SDL_SetRenderTarget(gs->win->renderer,
+                            gs->win->textures->rock);
+                    block = SDL_RectCreate(x * BLOCK_SIZE,
+                            y * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
+
+                    SDL_RenderCopy(gs->win->renderer,
+                            gs->win->textures->rock,NULL,&block);
+                    break;
+                default:
+                    break;
+            }
         }
     }
     SDL_RenderPresent(gs->win-> renderer);

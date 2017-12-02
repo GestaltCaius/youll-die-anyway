@@ -17,7 +17,7 @@ BROWSER = chromium
 .PHONY: all clean test doc
 
 all: $(SRC)
-	$(CC) $(INCLUDES) -D$(CPPFLAGS) $(CFLAGS) $(SRC) -o ${BIN} $(LDFLAGS)
+	$(CC) $(INCLUDES) -D$(CPPFLAGS) $(CFLAGS) $(DEBUG) $(SRC) -o ${BIN} $(LDFLAGS)
 
 clean:
 	${RM} ${OBJ} ${BIN}
