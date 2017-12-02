@@ -20,7 +20,7 @@ all: $(SRC)
 
 clean:
 	${RM} ${OBJ} ${BIN}
-	rm -rf doc tests/test_outputs
+	rm -rf doc
 
 doc:
 	doxygen src/Doxyfile
