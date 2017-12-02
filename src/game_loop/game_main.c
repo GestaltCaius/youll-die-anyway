@@ -8,7 +8,6 @@ int main(int argc, char* argv[])
     if (!game_state)
         return -1;
     // INIT SDL WINDOW
-    game_window_create(game_state);
     bool quit = false;
     SDL_Event e;
     while(!quit)

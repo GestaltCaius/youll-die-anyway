@@ -1,4 +1,4 @@
-
+#include "sdl.h"
 #define BLOCK_SIZE 16
 
 static SDL_Rect SDL_RectCreate(int x, int y, int w, int h)
