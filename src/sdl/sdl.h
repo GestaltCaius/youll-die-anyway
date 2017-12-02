@@ -28,8 +28,15 @@ struct textures
     SDL_Texture *player;
     SDL_Texture *groomf;
     SDL_Texture *spike;
-
 }
+
+enum color
+{
+    BLACK,
+    WHITE,
+    RED
+};
+
 struct mywindow *w;
 void init_mywindow(void);
 void close_sdl(void);

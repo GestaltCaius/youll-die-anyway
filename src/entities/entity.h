@@ -23,6 +23,8 @@ enum direction
 {
     LEFT,
     RIGHT,
+    UP,
+    DOWN
     IDLE
 };
 
