@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -std=c99 -pedantic -Wall -Wextra -Werror
-LFLAGS = -lSDL2
+LFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 OBJS = sdl.c sdl_function.c 
 OBJ_NAME = sdl_windows
 
