@@ -18,6 +18,6 @@ void game_state_destroy(struct game_state *game_state)
         return;
     player_destroy(game_state->player);
     list_destroy(game_state->list);
-    close_adl(game_state);
+    close_sdl(game_state);
     free(game_state);
 }

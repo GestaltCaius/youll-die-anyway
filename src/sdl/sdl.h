@@ -24,9 +24,10 @@ struct mywindow
 
 struct textures
 {
-    SDL_Texture *air;
+    SDL_Texture *background;
     SDL_Texture *stone;
-    SDL_Texture *player;
+    SDL_Texture *rock;
+    SDL_Texture *hero;
     SDL_Texture *groomf;
     SDL_Texture *spike;
 }

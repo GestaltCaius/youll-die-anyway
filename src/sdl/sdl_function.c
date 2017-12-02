@@ -15,12 +15,14 @@ void close_sdl(struct game_state *gs)
 {
     SDL_FreeSurface(gs->win->window_surface);
     SDL_FreeSurface(gs->win->bg_surface);
-    SDL_DestroyTexture(gs->win->textures->air);
+
+    SDL_DestroyTexture(gs->win->textures->background);
     SDL_DestroyTexture(gs->win->textures->stone);
-    SDL_DestroyTexture(gs->win->textures->player);
+    SDL_DestroyTexture(gs->win->textures->hero);
     SDL_DestroyTexture(gs->win->textures->groomf);
     SDL_DestroyTexture(gs->win->textures->spike);
-    
+    SDL_DestroyTexture(gs->win->textures->rock);
+
     SDL_DestroyRenderer(gs->win->renderer);
     SDL_DestroyWindow(gs->win->window);
     SDL_Quit();
@@ -63,11 +65,18 @@ bool init_window(struct game_state *gs)
     }
     
     // initialization texture
-    gs->win->textures->air =
+    gs->win->textures->background =
     loadTexture("src/ressource/png_texture/background.png",gs);
     gs->win->textures->stone =
     loadTexture("src/ressource/png_texture/rock.png",gs);
-
+    gs->win->textures->player =
+    loadTexture("src/ressource/png_texture/rock.png",gs);
+    gs->win->textures->player =
+    loadTexture("src/ressource/png_texture/rock.png",gs);
+    gs->win->textures->player =
+    loadTexture("src/ressource/png_texture/rock.png",gs);
+    gs->win->textures->player =
+    loadTexture("src/ressource/png_texture/rock.png",gs);
     return true;
 }
 

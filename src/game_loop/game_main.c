@@ -16,6 +16,8 @@ int main(int argc, char* argv[])
         // MOVE FUNCTION GOES HERE
         game_window_draw(game_state);
     }
-    close_sdl(game_state);
+
+
+    game_state_destroy(game_state);
     return 0;
 }
