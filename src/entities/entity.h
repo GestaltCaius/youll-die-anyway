@@ -9,7 +9,6 @@
  ** @date 2017-12-02
  */
 
-
 #include <stdlib.h>
 
 enum entity_type
