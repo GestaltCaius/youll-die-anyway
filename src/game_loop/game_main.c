@@ -10,7 +10,6 @@ int main(int argc, char* argv[])
         return -1;
     // INIT SDL WINDOW
     bool quit = false;
-    SDL_Event e;
     while(!quit)
     {
         // EVENTS

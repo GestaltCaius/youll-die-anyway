@@ -2,6 +2,14 @@
 # define PARSER_H
 
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+#include "entity.h"
+#include "game_state.h"
+#include "list.h"
+
 enum block_type
 {
     ROCK,
@@ -24,6 +32,6 @@ struct map
  **
  ** @return .map file translated into a map structure
  */
-int parser(char *map_name, struct game_state *game_state)
+int parser(char *map_name, struct game_state *game_state);
 
 #endif

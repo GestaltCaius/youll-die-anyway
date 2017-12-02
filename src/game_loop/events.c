@@ -1,10 +1,10 @@
-#include "game_main.h"
+#include "events.h"
 
-game_events(struct game_state *game_state)
+void game_events(struct game_state *game_state)
 {
     SDL_Event e;
     SDL_PollEvent(&e);
-    SDL_Delay(30);
+    SDL_Delay(10);
     if(e.type == SDL_KEYDOWN)
     {
         switch(e.key.keysym.sym)
@@ -16,16 +16,16 @@ game_events(struct game_state *game_state)
             game_state->restart = true;
             break;
         case SDLK_RIGHT:
-            game_state->player->dir = RIGHT;
+            game_state->player->entity->dir = RIGHT;
             break;
         case SDLK_LEFT:
-            game_state->player->dir = LEFT;
+            game_state->player->entity->dir = LEFT;
             break;
         case SDLK_UP:
-            game_state->player->dir = UP;
+            game_state->player->entity->dir = UP;
             break;
         default:
-            continue;
+            break;
         }
    }
 }

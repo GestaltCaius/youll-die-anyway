@@ -1,4 +1,4 @@
-#include "game_main.h"
+#include "load_map.h"
 
 struct game_state *load_map_get_state(char *filename)
 {

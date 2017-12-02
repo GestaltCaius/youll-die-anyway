@@ -1,9 +1,10 @@
 CC = gcc
-CFLAGS = -std=c99 -pedantic -Wall -Wextra -Werror 
-DEBUG = -g -fsanitize=address 
+CFLAGS = -std=c99 -pedantic -Wall -Wextra -Werror
+DEBUG = -g -fsanitize=address
+CPPFLAGS = _GNU_SOURCE
 LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
-MODULES   = entities parser sdl game_loop 
+MODULES   = entities parser sdl game_loop
 SRC_DIR   = $(addprefix src/, $(MODULES))
 SRC       = $(foreach sdir, $(SRC_DIR), $(wildcard $(sdir)/*.c))
 INCLUDES  = $(addprefix -I,$(SRC_DIR))
@@ -16,7 +17,7 @@ BROWSER = chromium
 .PHONY: all clean test doc
 
 all: $(SRC)
-	$(CC) $(INCLUDES) $(CFLAGS) $(SRC) -o ${BIN} $(LDFLAGS)
+	$(CC) $(INCLUDES) -D$(CPPFLAGS) $(CFLAGS) $(SRC) -o ${BIN} $(LDFLAGS)
 
 clean:
 	${RM} ${OBJ} ${BIN}

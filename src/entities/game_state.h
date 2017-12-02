@@ -6,6 +6,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
+#include <stdbool.h>
 
 #include "entity.h"
 #include "list.h"
@@ -36,6 +37,8 @@ struct game_state
     struct pos end_pos;
     struct map *map;
     struct mywindow *win;
+    bool quit;
+    bool restart;
 };
 
 
