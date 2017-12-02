@@ -9,7 +9,6 @@ void init_mywindow(void)
     w->bg_surface = NULL;
     w->renderer = NULL;
     w->texture = NULL;
-
 }
 
 void close_sdl(void)

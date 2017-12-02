@@ -18,9 +18,18 @@ struct mywindow
     SDL_Surface * window_surface;
     SDL_Surface * bg_surface;
     SDL_Renderer * renderer;
-    SDL_Texture * texture;
+    struct textures textures;
 };
 
+struct textures
+{
+    SDL_Texture *air;
+    SDL_Texture *stone;
+    SDL_Texture *player;
+    SDL_Texture *groomf;
+    SDL_Texture *spike;
+
+}
 struct mywindow *w;
 void init_mywindow(void);
 void close_sdl(void);

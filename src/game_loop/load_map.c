@@ -1,6 +1,5 @@
 #include "load_map.h"
 
-
 struct game_state *load_map_get_state(char *filename)
 {
     // init game state
