@@ -4,8 +4,7 @@
 enum block_type
 {
     ROCK,
-    AIR,
-    END
+    AIR
 };
 
 struct map
@@ -24,6 +23,6 @@ struct map
  **
  ** @return .map file translated into a map structure
  */
-struct map *parser(char *map_name, struct entity_list *list);
+int parser(char *map_name, struct game_state *game_state)
 
 #endif

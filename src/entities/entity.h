@@ -38,6 +38,7 @@ struct entity
 {
     struct pos pos;
     enum entity_type type;
+    enum direction dir;
 };
 
 struct player
@@ -45,7 +46,6 @@ struct player
     struct entity *entity;
     int is_alive;
     int jump;
-    enum direction dir;
 };
 
 /**
