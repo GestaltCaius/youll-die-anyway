@@ -1,11 +1,29 @@
-#ifndef ENTITY_H
-#define ENTITY_H
+#ifndef GAME_ENV_H
+#define GAME_ENV_H
+
+/**
+ ** @file game_env.h
+ ** @brief Game environment structures
+ ** @author Rod Guillaume
+ ** @version 1.0
+ ** @date 2017-12-02
+ */
+
+
+#include <stdlib.h>
 
 enum entity_type
 {
     TRAP,
     ENEMY,
     PLAYER
+};
+
+enum direction
+{
+    LEFT,
+    RIGHT,
+    IDLE
 };
 
 struct pos
@@ -22,20 +40,40 @@ struct entity
 
 struct player
 {
-    struct entity entity;
-    bool is_alive;
-    bool jump;
+    struct entity *entity;
+    int is_alive;
+    int jump;
     enum direction dir;
-
 };
 
 struct game_state
 {
     struct player player;
-    struct entity_list *list entities;
+    struct entity_list *list;
 };
 
+/**
+ ** @brief Entity constructor
+ ** @return new entity or NULL on error
+ */
 struct entity *entity_create(struct pos pos, enum entity_type type);
-struct entity *entity_destroy(struct pos pos, enum entity_type type);
 
-#endif /* ENTITY_H */
+/**
+ ** @brief Entity destructor
+ **
+ ** @param entity to destroy
+ */
+void entity_destroy(struct entity *entity);
+
+/**
+ ** @brief Player constructor
+ ** @return new player or NULL on error
+ */
+struct player *player_create(struct pos pos);
+
+/**
+ ** @brief Player destructor
+ */
+void player_destroy(struct player *player);
+
+#endif /* GAME_ENV_H */
