@@ -24,7 +24,7 @@ enum direction
     LEFT,
     RIGHT,
     UP,
-    DOWN
+    DOWN,
     IDLE
 };
 
