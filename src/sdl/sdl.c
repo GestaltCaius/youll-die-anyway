@@ -8,26 +8,16 @@ int main(int argc, char* argv[])
     init_window();
     bool quit = false;
     SDL_Event e;
-    modif_window();
+    w->texture = loadTexture("../ressource/texture.png");
     while(!quit)
     {
         SDL_PollEvent(&e);
-        if(e.type == SDL_KEYDOWN)
-        {
-            switch(e.key.keysym.sym)
-            {
-                case SDLK_a:
-                    quit = true;
-                    break;
-                case SDLK_b:
-                    load_bg();
-                    break;
-                default:
-                    modif_window();
-            }
-        }
+        if(e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_a)
+            quit = true;
+        SDL_RenderClear(w->renderer);
+        SDL_RenderCopy(w->renderer,w->texture,NULL,NULL);
+        SDL_RenderPresent(w->renderer);
     }
-
     close_sdl();
     return 0;
 }
