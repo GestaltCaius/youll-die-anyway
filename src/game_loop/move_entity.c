@@ -1,6 +1,6 @@
 // init at going down
 // then goes from up to down to up to down...
-
+#include <stdio.h>
 #include "move.h"
 
 static struct pos get_entity_pos(struct entity *entity)
@@ -39,10 +39,15 @@ void move_entity(struct game_state *gs)
     for (struct entity_list *list = gs->list; list; list = list->next)
     {
         struct entity *entity = list->data;
+        if (!(entity->type == STONE))
+            continue;
         if (!is_touching_wall(gs->map, entity))
             entity->pos.y = entity->dir == UP
-                            ? entity->pos.y - SPEED : entity->pos.y - SPEED;
+                            ? entity->pos.y - 0.1 : entity->pos.y + 0.1;
         else
+        {
             entity->dir = entity->dir == UP ? DOWN : UP;
+            printf("LOG: touched wall\n");
+        }
     }
 }
