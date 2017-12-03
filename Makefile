@@ -28,7 +28,7 @@ doc:
 	$(BROWSER) doc/html/index.html
 
 check: all
-	./$(BIN) tests/maps/level1.map
+	./$(BIN) tests/maps/level2.map
 
 test: all
 	echo 'No test suite written yet'
