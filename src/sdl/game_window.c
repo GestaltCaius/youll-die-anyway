@@ -121,15 +121,13 @@ void game_window_draw(struct game_state *gs)
         }
         tmp = tmp->next;
     }
-/*    SDL_Rect block;
+    SDL_Rect block;
     SDL_SetRenderTarget(gs->win->renderer,
             gs->win->textures->hero);
     block = SDL_RectCreate(gs->player->entity->pos.x * BLOCK_SIZE,
             gs->player->entity->pos.y * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
-
     SDL_RenderCopy(gs->win->renderer,
             gs->win->textures->hero,NULL,&block);
-*/
     SDL_RenderPresent(gs->win-> renderer);
 }
 
