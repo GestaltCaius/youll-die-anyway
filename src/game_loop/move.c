@@ -1,6 +1,3 @@
-#define SPEED 10
-#define GRAVITY 10
-
 #include "move.h"
 
 void game_move(struct game_state *game_state)

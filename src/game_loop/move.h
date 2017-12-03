@@ -1,8 +1,8 @@
 #ifndef MOVE_H
 #define MOVE_H
 
-#define SPEED 10
-#define GRAVITY 10
+#define SPEED 0.1
+#define GRAVITY 0.1
 
 #include "game_state.h"
 

@@ -7,5 +7,6 @@
 #include "game_state.h"
 #include "load_map.h"
 #include "events.h"
+#include "move.h"
 
 #endif /* GAME_MAIN_H */
