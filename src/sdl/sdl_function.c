@@ -22,6 +22,10 @@ void close_sdl(struct game_state *gs)
     SDL_DestroyTexture(gs->win->textures->groomf);
     SDL_DestroyTexture(gs->win->textures->spike);
     SDL_DestroyTexture(gs->win->textures->rock);
+    
+    TTF_CloseFont(gs->win->font);
+    TTF_Quit();
+
 
     SDL_DestroyRenderer(gs->win->renderer);
     SDL_DestroyWindow(gs->win->window);
@@ -63,7 +67,10 @@ bool init_window(struct game_state *gs)
             return false;
         }
     }
-
+    
+    TTF_Init();
+    gs->win->font = TTF_OpenFont("src/ressource/stocky.ttf",20);
+        
     // initialization texture
     gs->win->textures->background =
     loadTexture("src/ressource/png_texture/background.png",gs);

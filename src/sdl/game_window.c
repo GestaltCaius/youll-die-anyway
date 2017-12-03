@@ -10,34 +10,9 @@ static SDL_Rect SDL_RectCreate(int x, int y, int w, int h)
     return rect;
 }
 
-// init_mywindow + init_window in global variable w
-// TODO discuss about integrating w variable into game_state structure
-/*void game_window_create(struct game_state *game_state)
-  {
-// TODO might merge those two bad boys
-init_mywindow(game_state->win);
-init_window(game_state->win);
-}*/
-/*
-   static enum color get_block_texture(char block)
-   {
-   switch (block)
-   {
-   case '.':
-   return WHITE;
-   break;
-   case 'S':
-   return BLACK;
-   break;
-   default:
-   return RED;
-   break;
-   }i*/
-
-// Render struct map and characters
-void game_window_draw(struct game_state *gs)
+void window_render_map(struct game_state *gs)
 {
-    // TODO && chain those instructions to only have one return error.
+ // TODO && chain those instructions to only have one return error.
     // they all return an int so it can be used as a boolean conds chaining
 
     // set background texture
@@ -74,6 +49,10 @@ void game_window_draw(struct game_state *gs)
             }
         }
     }
+}
+
+void window_render_entity(struct game_state *gs)
+{
     struct entity_list * tmp = gs->list;
     while(tmp)
     {
@@ -121,28 +100,28 @@ void game_window_draw(struct game_state *gs)
         }
         tmp = tmp->next;
     }
-/*    SDL_Rect block;
+}
+
+void window_render_player(struct game_state *gs)
+{
+    SDL_Rect hblock;
     SDL_SetRenderTarget(gs->win->renderer,
             gs->win->textures->hero);
-    block = SDL_RectCreate(gs->player->entity->pos.x * BLOCK_SIZE,
-            gs->player->entity->pos.y * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
-
+    hblock = SDL_RectCreate(5 * BLOCK_SIZE,
+            5 * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
+//gs->player->entity->pos.x 
     SDL_RenderCopy(gs->win->renderer,
-            gs->win->textures->hero,NULL,&block);
-*/
-    SDL_RenderPresent(gs->win-> renderer);
+            gs->win->textures->hero,NULL,&hblock);
 }
 
 
-
-
-
-
-
-
-
-
-
-
+// Render struct map and characters
+void game_window_draw(struct game_state *gs)
+{
+    window_render_map(gs);
+    window_render_entity(gs);
+    window_render_player(gs);
+    SDL_RenderPresent(gs->win-> renderer);
+}
 
 

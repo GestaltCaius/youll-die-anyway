@@ -28,6 +28,7 @@ struct mywindow
     SDL_Surface * bg_surface;
     SDL_Renderer * renderer;
     struct textures *textures;
+    TTF_Font * font;
 };
 
 struct game_state
