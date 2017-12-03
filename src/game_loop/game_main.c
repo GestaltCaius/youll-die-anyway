@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
     bool menu = true;
     while(!game_state->quit)
     {
-        SDL_Delay(5);
+        SDL_Delay(25);
         if(menu)
         {
             menu_window(game_state);

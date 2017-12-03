@@ -19,7 +19,10 @@ void game_events(struct game_state *game_state)
         {
         case SDLK_UP:
             if (player->jump == 0 && is_on_ground(game_state))
+            {
+                Mix_PlayChannel(-1,game_state->win->jump,0);
                 player->jump = 2.5;
+            }
             break;
         case SDLK_q:
             game_state->quit = true;

@@ -12,8 +12,8 @@ static SDL_Rect SDL_RectCreate(int x, int y, int w, int h)
 
 void window_render_map(struct game_state *gs)
 {
-    
- // TODO && chain those instructions to only have one return error.
+
+    // TODO && chain those instructions to only have one return error.
     // they all return an int so it can be used as a boolean conds chaining
 
     // set background texture
@@ -117,31 +117,74 @@ void window_render_player(struct game_state *gs)
 
 
 void text_display(struct game_state *gs,char * text, int posx, int posy, 
-                    int w, int h,SDL_Color color)
+        int w, int h,SDL_Color color)
 {
     SDL_Surface * text1 = TTF_RenderText_Solid(gs->win->font,text,color);
     SDL_Texture *texturetext = SDL_CreateTextureFromSurface(gs->win->renderer,
-        text1);
-    int texW = 0; 
-    int texH = 0;
-    SDL_QueryTexture(texturetext, NULL, NULL, &texW, &texH);
+            text1);
     SDL_Rect dstrect = { posx, posy, w, h };
     SDL_RenderCopy(gs->win->renderer,texturetext,NULL,&dstrect);
     SDL_DestroyTexture(texturetext);
     SDL_FreeSurface(text1);   
 }
 
+static SDL_Texture *text_quit;
+static SDL_Texture *text_live;
+static SDL_Texture *text_timer;
+static SDL_Rect rect_quit;
+
+void text_display_game(struct game_state *gs)
+{
+    if(!text_quit)
+    {
+        SDL_Color color = { 255, 0, 0, 0 };
+        SDL_Surface * text1 = TTF_RenderText_Solid(gs->win->font,"Press Q to Quit"
+                ,color);
+        text_quit = SDL_CreateTextureFromSurface(gs->win->renderer,text1);
+        rect_quit.x =  0;
+        rect_quit.y = SCREEN_HEIGHT * 5 / 6 ;
+        rect_quit.w = 250;
+        rect_quit.h = 50;
+
+    }
+    rect_quit.x = 0;
+    SDL_RenderCopy(gs->win->renderer,text_quit,NULL,&rect_quit);
+    if(!text_live)
+    {
+        SDL_Color color = { 255, 0, 255, 0 };
+        SDL_Surface * text2 = TTF_RenderText_Solid(gs->win->font,"Live : 0"
+                ,color);
+        text_live = SDL_CreateTextureFromSurface(gs->win->renderer,text2);
+        rect_quit.x +=  300;
+    }
+    rect_quit.x +=  300;
+    SDL_RenderCopy(gs->win->renderer,text_live,NULL,&rect_quit);
+    if(!text_timer)
+    {
+        SDL_Color color = { 255, 0, 0, 0 };
+        SDL_Surface * text3 = TTF_RenderText_Solid(gs->win->font,"Time: 0"
+                ,color);
+        text_timer = SDL_CreateTextureFromSurface(gs->win->renderer,text3);
+        rect_quit.x +=  300;
+    }
+    rect_quit.x +=  300;
+    SDL_RenderCopy(gs->win->renderer,text_timer,NULL,&rect_quit);
+    //  SDL_DestroyTexture(texturetext);
+    //  SDL_FreeSurface(text1);   
+}
 // Render struct map and characters
 void game_window_draw(struct game_state *gs)
 {
-    window_render_map(gs);
-    SDL_Color color = { 255, 0, 0, 0 };
-    text_display(gs,"Press Q to Quit",0,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
 
+    //    SDL_Color color = { 255, 0, 0, 0 };
+    window_render_map(gs);
+    //    text_display(gs,"Press Q to Quit",0,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
+    //    text_display(gs,"live : 0 ", 300,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
+    //    text_display(gs,"timer : 0 ", 600,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
+    text_display_game(gs);
     window_render_entity(gs);
     window_render_player(gs);
 
-        
     SDL_RenderPresent(gs->win-> renderer);
 }
 
@@ -161,17 +204,23 @@ void menu_window(struct game_state *gs)
     color.g = 0;
     color.r= 255;
     text_display(gs,"Press Q to Quit",0,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
-    
+
     color.b = 255;
     color.g= 255;
     text_display(gs,"Zboubinours",SCREEN_WIDTH * 2/ 4,SCREEN_HEIGHT * 5 / 6,11 *
-    40,50,color);
+            40,50,color);
     text_display(gs,"Gobrunk",SCREEN_WIDTH * 2 / 4,SCREEN_HEIGHT * 5 / 6 + 50,7
-    * 40,50,color);
+            * 40,50,color);
     text_display(gs,"Nipica",SCREEN_WIDTH * 2 / 4,SCREEN_HEIGHT * 5 / 6 + 100 ,6
-    * 40,50,color);
+            * 40,50,color);
 
     SDL_RenderPresent(gs->win-> renderer);  
+
+
+    if(Mix_PlayingMusic() == 0)
+    {
+        Mix_PlayMusic(gs->win->music_bg,  -1);
+    }
 
     SDL_Event m;
     bool game = false;
@@ -190,23 +239,6 @@ void menu_window(struct game_state *gs)
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
