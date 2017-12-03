@@ -22,7 +22,8 @@ void close_sdl(struct game_state *gs)
     SDL_DestroyTexture(gs->win->textures->groomf);
     SDL_DestroyTexture(gs->win->textures->spike);
     SDL_DestroyTexture(gs->win->textures->rock);
-
+    SDL_DestroyTexture(gs->win->textures->life);
+    SDL_DestroyTexture(gs->win->textures->end);
     TTF_CloseFont(gs->win->font);
     TTF_Quit();
 
@@ -100,8 +101,11 @@ bool init_window(struct game_state *gs)
         loadTexture("src/ressource/png_texture/groomf.png",gs);
     gs->win->textures->spike =
         loadTexture("src/ressource/png_texture/spike.png",gs);
-
-    
+    gs->win->textures->end =
+        loadTexture("src/ressource/png_texture/groomf.png",gs);
+     gs->win->textures->life =
+        loadTexture("src/ressource/png_texture/groomf.png",gs);   
+ 
     gs->win->music_bg = Mix_LoadMUS( "src/ressource/nicemusic.wav" );
     if( gs->win->music_bg  == NULL )
     {

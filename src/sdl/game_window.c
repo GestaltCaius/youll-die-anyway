@@ -45,6 +45,22 @@ void window_render_map(struct game_state *gs)
                     SDL_RenderCopy(gs->win->renderer,
                             gs->win->textures->rock,NULL,&block);
                     break;
+                case END:
+                    SDL_SetRenderTarget(gs->win->renderer,
+                            gs->win->textures->background);
+                    block = SDL_RectCreate(x * BLOCK_SIZE,
+                            y * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
+
+                    SDL_RenderCopy(gs->win->renderer,
+                            gs->win->textures->background,NULL,&block);
+                    SDL_SetRenderTarget(gs->win->renderer,
+                            gs->win->textures->end);
+                    block = SDL_RectCreate(x * BLOCK_SIZE,
+                            y * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
+
+                    SDL_RenderCopy(gs->win->renderer,
+                            gs->win->textures->end,NULL,&block);
+                    break;
                 default:
                     break;
             }
@@ -63,12 +79,12 @@ void render_live(struct game_state *gs)
             if(x == 0 && y < 4)
                 continue;
             SDL_SetRenderTarget(gs->win->renderer,
-                    gs->win->textures->groomf);
+                    gs->win->textures->life);
             block = SDL_RectCreate(y * BLOCK_SIZE,
                     x * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
 
             SDL_RenderCopy(gs->win->renderer,
-                    gs->win->textures->groomf,NULL,&block);           
+                    gs->win->textures->life,NULL,&block);           
             count--;
         }
     }

@@ -19,6 +19,8 @@ struct textures
     SDL_Texture *hero;
     SDL_Texture *groomf;
     SDL_Texture *spike;
+    SDL_Texture *end;
+    SDL_Texture *life;
 };
 
 struct mywindow
