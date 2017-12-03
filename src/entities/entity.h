@@ -40,7 +40,6 @@ struct entity
 struct player
 {
     struct entity *entity;
-    int score;
     struct pos start;
     float jump;
 };

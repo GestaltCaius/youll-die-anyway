@@ -70,7 +70,7 @@ void window_render_map(struct game_state *gs)
 
 void render_live(struct game_state *gs)
 {
-    int count = gs->player->score;
+    int count = gs->score;
     SDL_Rect block;
     for (size_t x = 0; count > 0 && x < SCREEN_WIDTH / BLOCK_SIZE; x++)
     {
@@ -84,7 +84,7 @@ void render_live(struct game_state *gs)
                     x * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
 
             SDL_RenderCopy(gs->win->renderer,
-                    gs->win->textures->life,NULL,&block);           
+                    gs->win->textures->life,NULL,&block);
             count--;
         }
     }
@@ -156,7 +156,7 @@ void window_render_player(struct game_state *gs)
 }
 
 
-void text_display(struct game_state *gs,char * text, int posx, int posy, 
+void text_display(struct game_state *gs,char * text, int posx, int posy,
         int w, int h,SDL_Color color)
 {
     SDL_Surface * text1 = TTF_RenderText_Solid(gs->win->font,text,color);
@@ -165,7 +165,7 @@ void text_display(struct game_state *gs,char * text, int posx, int posy,
     SDL_Rect dstrect = { posx, posy, w, h };
     SDL_RenderCopy(gs->win->renderer,texturetext,NULL,&dstrect);
     SDL_DestroyTexture(texturetext);
-    SDL_FreeSurface(text1);   
+    SDL_FreeSurface(text1);
 }
 
 static SDL_Texture *text_quit;
@@ -199,7 +199,7 @@ void text_display_game(struct game_state *gs)
     rect_quit.h = 25;
     SDL_RenderCopy(gs->win->renderer,text_live,NULL,&rect_quit);
     //  SDL_DestroyTexture(texturetext);
-    //  SDL_FreeSurface(text1);   
+    //  SDL_FreeSurface(text1);
 }
 // Render struct map and characters
 void game_window_draw(struct game_state *gs)
@@ -227,7 +227,7 @@ void menu_window(struct game_state *gs)
     SDL_Color color = { 255, 255, 255, 0 };
     text_display(gs,"You'll die anyway",62,100,900,200,color);
 
-    text_display(gs,"Press Space to Play ", 312 ,350 ,400,100,color);   
+    text_display(gs,"Press Space to Play ", 312 ,350 ,400,100,color);
 
     color.b = 0;
     color.g = 0;
@@ -243,7 +243,7 @@ void menu_window(struct game_state *gs)
     text_display(gs,"Nipica",SCREEN_WIDTH * 2 / 4,SCREEN_HEIGHT * 5 / 6 + 100 ,6
             * 40,50,color);
 
-    SDL_RenderPresent(gs->win-> renderer);  
+    SDL_RenderPresent(gs->win-> renderer);
 
 
     if(Mix_PlayingMusic() == 0)
@@ -260,7 +260,7 @@ void menu_window(struct game_state *gs)
         if(m.type == SDL_KEYDOWN && m.key.keysym.sym == SDLK_SPACE)
             game = true;
         else if(m.type == SDL_KEYDOWN && m.key.keysym.sym == SDLK_q)
-        {   
+        {
             gs->quit = true;
             break;
         }
@@ -268,7 +268,3 @@ void menu_window(struct game_state *gs)
 
 
 }
-
-
-
-

@@ -67,7 +67,6 @@ struct player *player_create(struct pos pos)
     }
     player->jump = 0;
     player->start = pos;
-    player->score = 0;
     player->entity->dir = IDLE;
     return player;
 }

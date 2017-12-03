@@ -48,6 +48,7 @@ struct mywindow
 struct game_state
 {
     struct player *player;
+    int score;
     struct entity_list *list;
     struct pos end_pos;
     struct map *map;

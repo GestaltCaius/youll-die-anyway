@@ -21,6 +21,7 @@ struct game_state *game_state_create(void)
     init_window(game_state);
     game_state->map_files = get_maps_array();
     game_state->game_won = false;
+    game_state->score = 0;
     return game_state;
 }
 
