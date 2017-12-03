@@ -8,5 +8,6 @@
 #include "game_state.h"
 
 void game_move(struct game_state *game_state);
+void move_entity(struct game_state *gs);
 
 #endif /* MOVE_H */

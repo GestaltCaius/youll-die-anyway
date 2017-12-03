@@ -61,4 +61,5 @@ void game_move(struct game_state *game_state)
         }
     }
     player_move(game_state);
+    move_entity(game_state);
 }

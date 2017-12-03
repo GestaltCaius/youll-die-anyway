@@ -1,0 +1,48 @@
+// init at going down
+// then goes from up to down to up to down...
+
+#include "move.h"
+
+static struct pos get_entity_pos(struct entity *entity)
+{
+    struct pos pos;
+    pos.x = floor(entity->pos.x);
+    pos.y = floor(entity->pos.y);
+    return pos;
+}
+
+/**
+ * check if a < x < b
+ * @return  1 if true, 0 if false
+ */
+static int is_between(float x, float a, float b)
+{
+    return a < x && x < b;
+}
+
+static int is_touching_wall(struct map *map, struct entity *entity)
+{
+    float epsilon = 0.1;
+        struct pos pos = get_entity_pos(entity);
+        int posx = pos.x;
+        int posy = pos.y;
+        posy = entity->dir == UP ? posy - 1 : posy + 1;
+        return map->block_type[posy][posx] == ROCK
+                && ((entity->dir == UP && is_between(entity->pos.y, posy + 1,
+                    posy + 1 + epsilon))
+                || (entity->dir == DOWN && is_between(entity->pos.y,
+                    posy - epsilon, posy)));
+}
+
+void move_entity(struct game_state *gs)
+{
+    for (struct entity_list *list = gs->list; list; list = list->next)
+    {
+        struct entity *entity = list->data;
+        if (!is_touching_wall(gs->map, entity))
+            entity->pos.y = entity->dir == UP
+                            ? entity->pos.y - SPEED : entity->pos.y - SPEED;
+        else
+            entity->dir = entity->dir == UP ? DOWN : UP;
+    }
+}
