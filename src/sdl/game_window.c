@@ -12,6 +12,7 @@ static SDL_Rect SDL_RectCreate(int x, int y, int w, int h)
 
 void window_render_map(struct game_state *gs)
 {
+    
  // TODO && chain those instructions to only have one return error.
     // they all return an int so it can be used as a boolean conds chaining
 
@@ -123,5 +124,48 @@ void game_window_draw(struct game_state *gs)
     window_render_player(gs);
     SDL_RenderPresent(gs->win-> renderer);
 }
+
+
+
+void menu_window(struct game_state *gs)
+{
+    SDL_SetRenderDrawColor(gs->win->renderer, 0xFF, 0xFF,0xFF,0xFF);
+    SDL_RenderClear(gs->win->renderer);
+    SDL_RenderPresent(gs->win-> renderer);  
+
+    SDL_Event m;
+    bool game = false;
+    while(!game)
+    {
+        SDL_Delay(25);
+        SDL_PollEvent(&m);
+        if(m.type == SDL_KEYDOWN && m.key.keysym.sym == SDLK_SPACE)
+            game = true;
+        else if(m.type == SDL_KEYDOWN && m.key.keysym.sym == SDLK_q)
+        {   
+            gs->quit = true;
+            break;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
