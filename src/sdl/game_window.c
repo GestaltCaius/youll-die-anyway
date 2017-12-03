@@ -107,11 +107,11 @@ void window_render_player(struct game_state *gs)
     SDL_Rect hblock;
     SDL_SetRenderTarget(gs->win->renderer,
             gs->win->textures->hero);
-    hblock = SDL_RectCreate(5 * BLOCK_SIZE,
-            5 * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
-//gs->player->entity->pos.x 
+    hblock = SDL_RectCreate(gs->player->entity->pos.x * BLOCK_SIZE,
+            gs->player->entity->pos.y * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
     SDL_RenderCopy(gs->win->renderer,
             gs->win->textures->hero,NULL,&hblock);
+    SDL_RenderPresent(gs->win-> renderer);
 }
 
 

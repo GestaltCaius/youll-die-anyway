@@ -12,28 +12,13 @@ enum block_type get_block_type(char type, struct pos pos,
     else if (type == 'G')
         list_add(game_state->list, pos, GROOMF);
     else if (type == 'P')
-        player_create(pos);
+        game_state->player = player_create(pos);
     else if (type == 'E')
     {
         game_state->end_pos.x = pos.x;
         game_state->end_pos.y = pos.y;
     }
     return AIR;
-}
-
-void print_map(struct game_state *gs)
-{
-    for(int i = 0; i < gs->map->height; i++)
-    {
-        for(int j = 0; j < gs->map->width; j++)
-        {
-            if(gs->map->block_type[i][j] == AIR)
-                printf("A");
-            else
-                printf("R");
-        }
-        printf("\n");
-    }
 }
 
 int parser(char *map_name, struct game_state *game_state)
@@ -59,6 +44,5 @@ int parser(char *map_name, struct game_state *game_state)
         }
     }
     game_state->map = map;
-    print_map(game_state);
     return 1;
 }
