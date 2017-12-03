@@ -1,22 +1,37 @@
 # Documentation
 To open the project's documentation please use:
+
 > make doc
 
 Note that you can choose in which browser open the documentation.
-The following will open it in firefox.
+For instance, the following will open it in firefox.
+
 > BROWSER=firefox make doc
 
 The default BROWSER is chromium.
 
 # How to launch the game
 ## Compile it
-Both commands work.
+Both of these commands work.
+
 > make
 > make all
 
 ## Run the game
 In the root directory:
-> ./game
+
+> ./youlldie
 
 # How to play
-TODO
+## Movements
+### Going right/left
+Use left (resp. right) arrow to switch the character's direction from right
+to left (resp. from left to right).
+When you start the game the character is idling, waiting for your first
+movement direction.
+
+### Jumping
+Use up arrow to jump.
+
+### Misc
+You can quit the game using q, and restart the current level using r.

@@ -9,25 +9,30 @@
         [X] Monster list
 
 # PARSER
-    [] .map parser into map structure
+    [X] .map parser into map structure
 
 # GAME LOOP
-    [] move
-        [] move player
-            [] left right
-            [] jump
-        [] move entities
-        [] detect movement boundaries (walls, etc.)
-    [] events
-    [] main
-    [] load map (integrating entities and parser)
+    [X] move
+        [X] move player
+            [X] left right
+            [X] jump
+        [X] move entities
+        [X] detect movement boundaries (walls, etc.)
+    [X] events
+    [X] main
+    [X] load map (integrating entities and parser)
+    [X] load next map
+    [X] cheat key to skip map (mainly for demo purposes)
 
 # SDL
     [X] load textures
-    [~] display map
-    [] menus
-        [] pause
-        [] start
-        [] death
-    [] death counter
-    [] time counter
+    [X] display map
+    [X] menus
+        [X] start
+        [X] win
+    [X] death counter
+
+# Improvments
+    [~] add maps
+    [ ] Optimize SDL (not rendering the full map, but only the layer of the moving elements)
+    [ ] Animations

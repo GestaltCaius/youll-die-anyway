@@ -10,14 +10,14 @@ SRC       = $(foreach sdir, $(SRC_DIR), $(wildcard $(sdir)/*.c))
 INCLUDES  = $(addprefix -I,$(SRC_DIR))
 OBJ = $(SRC:.c=.o)
 
-BIN = game
+BIN = youlldie
 BROWSER = chromium
 
-.DEFAULT_GOAL := check
-.PHONY: all clean test doc
+.DEFAULT_GOAL := all
+.PHONY: all clean check doc
 
 all: $(SRC)
-	$(CC) $(INCLUDES) -D$(CPPFLAGS) $(CFLAGS) $(DEBUG) $(SRC) -o ${BIN} $(LDFLAGS)
+	$(CC) $(INCLUDES) -D$(CPPFLAGS) $(CFLAGS) $(SRC) -o ${BIN} $(LDFLAGS)
 
 clean:
 	${RM} ${OBJ} ${BIN}
@@ -27,8 +27,5 @@ doc:
 	doxygen src/Doxyfile
 	$(BROWSER) doc/html/index.html
 
-check: all
-	./$(BIN) tests/maps/level2.map
-
-test: all
-	echo 'No test suite written yet'
+check: $(SRC)
+	$(CC) $(INCLUDES) -D$(CPPFLAGS) $(CFLAGS) $(DEBUG) $(SRC) -o ${BIN} $(LDFLAGS)
