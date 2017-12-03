@@ -116,15 +116,6 @@ void window_render_player(struct game_state *gs)
 }
 
 
-// Render struct map and characters
-void game_window_draw(struct game_state *gs)
-{
-    window_render_map(gs);
-    window_render_entity(gs);
-    window_render_player(gs);
-    SDL_RenderPresent(gs->win-> renderer);
-}
-
 void text_display(struct game_state *gs,char * text, int posx, int posy, 
                     int w, int h,SDL_Color color)
 {
@@ -140,26 +131,44 @@ void text_display(struct game_state *gs,char * text, int posx, int posy,
     SDL_FreeSurface(text1);   
 }
 
+// Render struct map and characters
+void game_window_draw(struct game_state *gs)
+{
+    window_render_map(gs);
+    window_render_entity(gs);
+    window_render_player(gs);
+
+    SDL_Color color = { 255, 0, 0, 0 };
+    text_display(gs,"To Quit -- q -- ",0,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
+
+    SDL_RenderPresent(gs->win-> renderer);
+}
+
+
 
 void menu_window(struct game_state *gs)
 {
-    SDL_SetRenderDrawColor(gs->win->renderer, 0xFF, 0xFF,0xFF,0xFF);
+    SDL_SetRenderDrawColor(gs->win->renderer, 0, 0,0,0);
     SDL_RenderClear(gs->win->renderer);
-    window_render_map(gs);
 
-    SDL_Color color = { 0, 255, 0, 0 };
-    text_display(gs,"IDK the Name",SCREEN_WIDTH / 4,0,600,100,color);
-    text_display(gs,"By",2 * SCREEN_WIDTH / 4,100,100,100,color);
-    text_display(gs,"Zboubinours",SCREEN_WIDTH / 4,250,400,50,color);
-    text_display(gs,"Gobrunk",SCREEN_WIDTH / 4, 300,200,50,color);
-    text_display(gs,"Nipica",SCREEN_WIDTH / 4,350,200,50,color);
+    SDL_Color color = { 255, 255, 255, 0 };
+    text_display(gs,"You'll die anyway",62,100,900,200,color);
 
+    text_display(gs,"Press Space to Play ", 312 ,350 ,400,100,color);   
+
+    color.b = 0;
     color.g = 0;
     color.r= 255;
-    text_display(gs,"To Quit -- q -- ",0,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
+    text_display(gs,"Press Q to Quit",0,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
     
-    text_display(gs,"To Play -- SPACE -- ", 300 ,SCREEN_HEIGHT * 5 / 6 ,
-                    250,50,color);
+    color.b = 255;
+    color.g= 255;
+    text_display(gs,"Zboubinours",SCREEN_WIDTH * 2/ 4,SCREEN_HEIGHT * 5 / 6,11 *
+    40,50,color);
+    text_display(gs,"Gobrunk",SCREEN_WIDTH * 2 / 4,SCREEN_HEIGHT * 5 / 6 + 50,7
+    * 40,50,color);
+    text_display(gs,"Nipica",SCREEN_WIDTH * 2 / 4,SCREEN_HEIGHT * 5 / 6 + 100 ,6
+    * 40,50,color);
 
     SDL_RenderPresent(gs->win-> renderer);  
 
