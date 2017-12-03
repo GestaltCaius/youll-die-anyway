@@ -53,3 +53,11 @@ int parser(char *map_name, struct game_state *game_state)
     game_state->map = map;
     return 1;
 }
+
+void map_destroy(struct map *map)
+{
+    for (int i = 0; i < map->height; i++)
+        free(map->block_type[i]);
+    free(map->block_type);
+    free(map);
+}

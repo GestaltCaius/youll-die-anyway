@@ -36,7 +36,6 @@ struct map
  */
 int parser(char *map_name, struct game_state *game_state);
 
-// TODO
 void map_destroy(struct map *map);
 
 #endif
