@@ -10,10 +10,7 @@ static char **get_maps_array(void)
     map_files[4] = "tests/maps/level5.map";
     map_files[5] = "tests/maps/level6.map";
     map_files[6] = "tests/maps/level7.map";
-    map_files[7] = "tests/maps/level8.map";
-    map_files[8] = "tests/maps/level9.map";
-    map_files[9] = "tests/maps/level10.map";
-    map_files[10] = NULL;
+    map_files[7] = NULL;
     return map_files;
 }
 
