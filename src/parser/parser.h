@@ -13,7 +13,8 @@
 enum block_type
 {
     ROCK,
-    AIR
+    AIR,
+    END
 };
 
 struct map

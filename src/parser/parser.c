@@ -17,6 +17,7 @@ enum block_type get_block_type(char type, struct pos pos,
     {
         game_state->end_pos.x = pos.x;
         game_state->end_pos.y = pos.y;
+        return END;
     }
     return AIR;
 }
@@ -43,6 +44,8 @@ int parser(char *map_name, struct game_state *game_state)
                                                 game_state);
         }
     }
+    if(game_state->map)
+        free(game_state->map);
     game_state->map = map;
     return 1;
 }
