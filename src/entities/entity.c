@@ -33,7 +33,18 @@ struct entity *entity_create(struct pos pos, enum entity_type type)
         return NULL;
     entity->pos = pos;
     entity->type = type;
-    entity->dir = type == STONE ? DOWN : IDLE;
+    switch (type)
+    {
+    case STONE:
+        entity->dir = DOWN;
+        break;
+    case GROOMF:
+        entity->dir = LEFT;
+        break;
+    default:
+        entity->dir = IDLE;
+        break;
+    }
     entity->hitbox = hitbox_create(type);
     return entity;
 }
