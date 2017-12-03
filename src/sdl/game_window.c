@@ -135,12 +135,13 @@ void text_display(struct game_state *gs,char * text, int posx, int posy,
 void game_window_draw(struct game_state *gs)
 {
     window_render_map(gs);
+    SDL_Color color = { 255, 0, 0, 0 };
+    text_display(gs,"Press Q to Quit",0,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
+
     window_render_entity(gs);
     window_render_player(gs);
 
-    SDL_Color color = { 255, 0, 0, 0 };
-    text_display(gs,"To Quit -- q -- ",0,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
-
+        
     SDL_RenderPresent(gs->win-> renderer);
 }
 
