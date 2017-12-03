@@ -49,8 +49,9 @@ void game_window_draw(struct game_state *gs)
         for (size_t y = 0; y < SCREEN_HEIGHT / BLOCK_SIZE; y++)
         {
             SDL_Rect block;
-/*            if(x == y)
+            switch(gs->map->block_type[y][x])
             {
+                case AIR:
                     SDL_SetRenderTarget(gs->win->renderer,
                             gs->win->textures->background);
                     block = SDL_RectCreate(x * BLOCK_SIZE,
@@ -58,9 +59,8 @@ void game_window_draw(struct game_state *gs)
 
                     SDL_RenderCopy(gs->win->renderer,
                             gs->win->textures->background,NULL,&block);
-            }
-            else
-            {*/
+                    break;
+                case ROCK:
                     SDL_SetRenderTarget(gs->win->renderer,
                             gs->win->textures->rock);
                     block = SDL_RectCreate(x * BLOCK_SIZE,
@@ -68,8 +68,81 @@ void game_window_draw(struct game_state *gs)
 
                     SDL_RenderCopy(gs->win->renderer,
                             gs->win->textures->rock,NULL,&block);
-           // }
+                    break;
+                default:
+                    break;
+            }
         }
     }
+    struct entity_list * tmp = gs->list;
+    while(tmp)
+    {
+        SDL_Rect block;
+        switch(tmp->data->type)
+        {
+            case SPIKE:
+                SDL_SetRenderTarget(gs->win->renderer,
+                        gs->win->textures->spike);
+                block = SDL_RectCreate(tmp->data->pos.x * BLOCK_SIZE,
+                        tmp->data->pos.y * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
+
+                SDL_RenderCopy(gs->win->renderer,
+                        gs->win->textures->spike,NULL,&block);
+                break;
+            case STONE:
+                SDL_SetRenderTarget(gs->win->renderer,
+                        gs->win->textures->stone);
+                block = SDL_RectCreate(tmp->data->pos.x * BLOCK_SIZE,
+                        tmp->data->pos.y* BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
+
+                SDL_RenderCopy(gs->win->renderer,
+                        gs->win->textures->stone,NULL,&block);
+                break;
+            case GROOMF:
+                SDL_SetRenderTarget(gs->win->renderer,
+                        gs->win->textures->groomf);
+                block = SDL_RectCreate(tmp->data->pos.x * BLOCK_SIZE,
+                        tmp->data->pos.y* BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
+
+                SDL_RenderCopy(gs->win->renderer,
+                        gs->win->textures->groomf,NULL,&block);
+                break;
+            case PLAYER:
+                SDL_SetRenderTarget(gs->win->renderer,
+                        gs->win->textures->hero);
+                block = SDL_RectCreate(tmp->data->pos.x * BLOCK_SIZE,
+                        tmp->data->pos.y* BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
+
+                SDL_RenderCopy(gs->win->renderer,
+                        gs->win->textures->hero,NULL,&block);
+                break;
+            default:
+                break;
+        }
+        tmp = tmp->next;
+    }
+/*    SDL_Rect block;
+    SDL_SetRenderTarget(gs->win->renderer,
+            gs->win->textures->hero);
+    block = SDL_RectCreate(gs->player->entity->pos.x * BLOCK_SIZE,
+            gs->player->entity->pos.y * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
+
+    SDL_RenderCopy(gs->win->renderer,
+            gs->win->textures->hero,NULL,&block);
+*/
     SDL_RenderPresent(gs->win-> renderer);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
