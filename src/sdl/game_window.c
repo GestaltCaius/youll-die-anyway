@@ -243,6 +243,17 @@ void menu_window(struct game_state *gs)
     text_display(gs,"Nipica",SCREEN_WIDTH * 2 / 4,SCREEN_HEIGHT * 5 / 6 + 100 ,6
             * 40,50,color);
 
+
+    SDL_Rect block;
+    SDL_SetRenderTarget(gs->win->renderer,
+            gs->win->textures->hero);
+    block = SDL_RectCreate(200,500, 5 * BLOCK_SIZE, 5 * BLOCK_SIZE);
+
+    SDL_RenderCopy(gs->win->renderer,
+            gs->win->textures->hero,NULL,&block);
+
+    SDL_RenderPresent(gs->win-> renderer);
+
     SDL_RenderPresent(gs->win-> renderer);
 
 
@@ -265,6 +276,68 @@ void menu_window(struct game_state *gs)
             break;
         }
     }
-
-
 }
+
+
+void menu_end(struct game_state *gs)
+{
+    SDL_SetRenderDrawColor(gs->win->renderer, 0, 0,0,0);
+    SDL_RenderClear(gs->win->renderer);
+
+    SDL_Color color = { 255, 255, 255, 0 };
+    text_display(gs,"The End",62,500,900,200,color);
+
+    SDL_Rect block;
+
+
+    SDL_SetRenderTarget(gs->win->renderer,
+            gs->win->textures->hero);
+    block = SDL_RectCreate(200,150, 8 * BLOCK_SIZE, 8 * BLOCK_SIZE);
+
+    SDL_RenderCopy(gs->win->renderer,
+            gs->win->textures->hero,NULL,&block);
+
+    SDL_Rect hblock;
+
+    SDL_SetRenderTarget(gs->win->renderer,
+            gs->win->textures->groomf);
+    hblock = SDL_RectCreate(900,750, 5 * BLOCK_SIZE, 5 * BLOCK_SIZE);
+    SDL_RenderCopy(gs->win->renderer,
+            gs->win->textures->groomf,NULL,&hblock);
+
+    text_display(gs,"Press Q to Quit",0,SCREEN_HEIGHT * 5 / 6 ,250,50,color);   
+    text_display(gs,"Press R to Restart",300,SCREEN_HEIGHT * 5 / 6 ,250,50,color); 
+
+    SDL_RenderPresent(gs->win-> renderer);
+    if(Mix_PlayingMusic() == 0)
+    {
+        Mix_PlayMusic(gs->win->music_bg2,  -1);
+    }
+
+    SDL_Event m;
+    bool game = false;
+    while(!game)
+    {
+        SDL_Delay(25);
+        SDL_PollEvent(&m);
+        if(m.type == SDL_KEYDOWN && m.key.keysym.sym == SDLK_SPACE)
+            game = true;
+        else if(m.type == SDL_KEYDOWN && m.key.keysym.sym == SDLK_q)
+        {
+            gs->quit = true;
+            break;
+        }
+        else if(m.type == SDL_KEYDOWN && m.key.keysym.sym == SDLK_r)
+        {
+            gs->game_won = false;
+            gs->quit = false;
+            break;
+        }
+    }
+}
+
+
+
+
+
+

@@ -31,5 +31,5 @@ SDL_Texture* loadTexture(char* path,struct game_state *gs);
 void game_window_draw(struct game_state *gs);
 bool init_window(struct game_state *gs);
 void menu_window(struct game_state *gs);
-
+void menu_end(struct game_state *gs);
 #endif

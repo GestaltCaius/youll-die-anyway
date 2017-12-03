@@ -6,19 +6,32 @@ int main(void)
     if (!game_state)
         return -1;
     bool menu = true;
-    while(!game_state->quit)
+    game_state->game_won = false;
+    while(!game_state->game_won)
     {
-        SDL_Delay(25);
-        if(menu)
+        menu = true;
+        game_state = load_map_get_state();
+        while(!game_state->quit)
         {
-            menu_window(game_state);
-            menu = false;
+            SDL_Delay(25);
+            if(menu)
+            {
+                menu_window(game_state);
+                menu = false;
+            }
+            if(game_state->game_won)
+            {
+                menu_end(game_state);
+            }
+            else
+            {
+                game_events(game_state);
+                game_move(game_state);
+                game_window_draw(game_state);
+            }
         }
-        game_events(game_state);
-        game_move(game_state);
-        game_window_draw(game_state);
-
-
+        if(game_state->quit)
+            break;
     }
     game_state_destroy(game_state);
     return 0;

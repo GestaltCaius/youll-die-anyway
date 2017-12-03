@@ -1,3 +1,4 @@
+#include "load_map.h"
 #include "events.h"
 
 static int is_on_ground(struct game_state *gs)
@@ -28,7 +29,7 @@ void game_events(struct game_state *game_state)
             game_state->quit = true;
             break;
         case SDLK_r:
-            game_state->restart = true;
+            game_state->player->entity->pos = game_state->player->start;
             break;
         case SDLK_RIGHT:
             game_state->player->entity->dir = RIGHT;
@@ -36,6 +37,8 @@ void game_events(struct game_state *game_state)
         case SDLK_LEFT:
             game_state->player->entity->dir = LEFT;
             break;
+        case SDLK_p:
+            load_next_map(game_state);
         default:
             break;
         }
