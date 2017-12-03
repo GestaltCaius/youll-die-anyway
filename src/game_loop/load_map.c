@@ -25,6 +25,7 @@ void *load_next_map(struct game_state *game_state)
         return game_state;
     }
     list_destroy(game_state->list);
+    game_state->list = list_create();
     if (parser(game_state->map_files[new_id], game_state) < 0)
     {
         game_state_destroy(game_state);
