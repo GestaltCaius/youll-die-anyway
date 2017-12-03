@@ -15,15 +15,20 @@ void game_move(struct game_state *game_state)
         case RIGHT:
             list->data->pos.x += SPEED;
             break;
-        case UP:
-            list->data->pos.y -= SPEED;
-            break;
-        case DOWN:
-            list->data->pos.y += SPEED;
-            break;
-        case IDLE:
+        default:
             break;
         }
-        list->data->pos.x += SPEED;
+    }
+    struct entity *player = game_state->player->entity;
+    switch(player->dir)
+    {
+    case LEFT:
+        player->pos.x -= SPEED;
+        break;
+    case RIGHT:
+        player->pos.x += SPEED;
+        break;
+    default:
+        break;
     }
 }
