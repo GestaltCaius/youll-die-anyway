@@ -1,9 +1,17 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+/**
+** @file parser.h
+** @brief .map parser, creating map structure and entity_list
+** @author Francois Kremer
+** @version 1.0
+** @date 2017-12-03
+*/
 
-#include <stdlib.h>
+
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "entity.h"
@@ -27,15 +35,16 @@ struct map
 
 
 /**
- ** @brief loads a map from a .map file
- **
- ** @param map_name .map file
- ** @param list enemies list
- **
- ** @return .map file translated into a map structure
- */
+** @brief loads a map from a .map file
+** @param map_name .map file
+** @param list enemies list
+** @return .map file translated into a map structure
+*/
 int parser(char *map_name, struct game_state *game_state);
 
+/**
+** @brief map structure destructor
+*/
 void map_destroy(struct map *map);
 
 #endif
