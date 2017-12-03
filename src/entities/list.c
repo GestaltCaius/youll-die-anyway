@@ -76,10 +76,10 @@ struct entity_list *list_add(struct entity_list *list,
 
 void list_remove(struct entity_list *list, int id)
 {
-    struct entity_list *prev;
+    struct entity_list *prev = NULL;
     for (; list && list->id != id; list = list->next)
         prev = list;
-    if (list)
+    if (list && prev)
     {
         prev->next = list->next;
         list_destroy_node(list);
