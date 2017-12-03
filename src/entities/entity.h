@@ -32,6 +32,7 @@ enum direction
 struct entity
 {
     struct pos pos;
+    struct pos hitbox;
     enum entity_type type;
     enum direction dir;
 };
@@ -39,7 +40,8 @@ struct entity
 struct player
 {
     struct entity *entity;
-    int is_alive;
+    int score;
+    struct pos start;
     float jump;
 };
 

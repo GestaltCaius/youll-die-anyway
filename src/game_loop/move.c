@@ -80,6 +80,46 @@ void player_move(struct game_state *game_state)
     h_move(game_state, player, player->pos.x + SPEED * xspeed, player->pos.y);
 }
 
+int check_hitbox(struct entity *player, struct entity *entity)
+{
+    if(player->pos.x >= entity->pos.x
+        && player->pos.x <= entity->pos.x + entity->hitbox.x
+        && player->pos.y >= entity->pos.y
+        && player->pos.y <= entity->pos.y + entity->hitbox.y)
+        return 0;
+    if(player->pos.x + 1 >= entity->pos.x
+        && player->pos.x + 1 <= entity->pos.x + entity->hitbox.x
+        && player->pos.y >= entity->pos.y
+        && player->pos.y <= entity->pos.y + entity->hitbox.y)
+        return 0;
+   if(player->pos.x >= entity->pos.x
+        && player->pos.x <= entity->pos.x + entity->hitbox.x
+        && player->pos.y + 1 >= entity->pos.y
+        && player->pos.y + 1<= entity->pos.y + entity->hitbox.y)
+        return 0;
+   if(player->pos.x + 1 >= entity->pos.x
+        && player->pos.x + 1 <= entity->pos.x + entity->hitbox.x
+        && player->pos.y + 1 >= entity->pos.y
+        && player->pos.y + 1 <= entity->pos.y + entity->hitbox.y)
+        return 0;
+    return 1;
+}
+
+void player_die(struct game_state *gs)
+{
+    struct player *player = gs->player;
+    for(struct entity_list *list = gs->list; list; list = list->next)
+    {
+        struct entity *entity = list->data;
+        if(check_hitbox(player->entity, entity) == 0)
+        {
+            player->entity->pos.x = player->start.x;
+            player->entity->pos.y = player->start.y;
+            player->score++;
+        }
+    }
+}
+
 void game_move(struct game_state *game_state)
 {
     for (struct entity_list *list = game_state->list; list; list = list->next)
@@ -97,5 +137,6 @@ void game_move(struct game_state *game_state)
         }
     }
     player_move(game_state);
-    move_entity(game_state);
+    /* move_entity(game_state);*/
+    player_die(game_state);
 }
