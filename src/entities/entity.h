@@ -24,8 +24,6 @@ enum direction
 {
     LEFT = -1,
     RIGHT = 1,
-    UP,
-    DOWN,
     IDLE
 };
 
@@ -40,7 +38,7 @@ struct player
 {
     struct entity *entity;
     int is_alive;
-    int jump;
+    float jump;
 };
 
 /**

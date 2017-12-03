@@ -13,7 +13,7 @@ OBJ = $(SRC:.c=.o)
 BIN = game
 BROWSER = chromium
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := check
 .PHONY: all clean test doc
 
 all: $(SRC)
@@ -26,6 +26,9 @@ clean:
 doc:
 	doxygen src/Doxyfile
 	$(BROWSER) doc/html/index.html
+
+check: all
+	./$(BIN) tests/maps/level1.map
 
 test: all
 	echo 'No test suite written yet'

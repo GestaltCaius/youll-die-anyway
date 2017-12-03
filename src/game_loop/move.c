@@ -19,16 +19,24 @@ void player_move(struct game_state *game_state)
     float posx = player->pos.x + SPEED * xspeed;
     float posy = player->pos.y;
     int floor_posx = floor(posx);
-    int floor_posy = ceil(posy);
+    int floor_posy = floor(posy);
     struct map *map = game_state->map;
-    if(map->block_type[floor_posy + 1][floor_posx] != ROCK
-        || posy != floor_posy)
+    if((map->block_type[floor_posy + 1][floor_posx] != ROCK
+        || posy != floor_posy) && game_state->player->jump == 0)
     {
         player->pos.y = posy + GRAVITY;
         posy = player->pos.y;
         floor_posy = floor(posy);
     }
-    if(posx > 0 && map->block_type[floor_posy][floor_posx - 1] != ROCK
+    if (game_state->player->jump
+        && (map->block_type[floor_posy - 1][floor_posx] != ROCK))
+    {
+        player->pos.y -= GRAVITY;
+        game_state->player->jump -= GRAVITY;
+        posy = player->pos.y;
+        floor_posy = floor(posy);
+    }
+    if (posx > 0 && map->block_type[floor_posy][floor_posx - 1] != ROCK
         && posx + 1 < map->width
         && map->block_type[floor_posy][floor_posx + 1] != ROCK)
     {
