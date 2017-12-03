@@ -21,6 +21,21 @@ enum block_type get_block_type(char type, struct pos pos,
     return AIR;
 }
 
+void print_map(struct game_state *gs)
+{
+    for(int i = 0; i < gs->map->height; i++)
+    {
+        for(int j = 0; j < gs->map->width; j++)
+        {
+            if(gs->map->block_type[i][j] == AIR)
+                printf("A");
+            else
+                printf("R");
+        }
+        printf("\n");
+    }
+}
+
 int parser(char *map_name, struct game_state *game_state)
 {
     FILE *f = fopen(map_name, "r");
@@ -32,18 +47,18 @@ int parser(char *map_name, struct game_state *game_state)
         return -1;
     map->width = atoi(strtok(buffer, " "));
     map->height = atoi(strtok(NULL, " "));
-    map->block_type = malloc(sizeof(enum block_type) * map->height);
+    map->block_type = malloc(sizeof(enum block_type*) * map->height);
     for(int i = 0; (lineread = getline(&buffer, &line_length, f)) != -1; i++)
     {
-        enum block_type line_block_type[map->width];
+        map->block_type[i] = malloc(sizeof(enum block_type) * map->width);
         for(int j = 0; buffer[j] != '\n'; j++)
         {
             struct pos pos = {j, i};
-            line_block_type[j] = get_block_type(buffer[j], pos,
+            map->block_type[i][j] = get_block_type(buffer[j], pos,
                                                 game_state);
         }
-        map->block_type[i] = line_block_type;
     }
     game_state->map = map;
+    print_map(game_state);
     return 1;
 }

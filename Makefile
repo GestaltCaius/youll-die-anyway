@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -std=c99 -pedantic -Wall -Wextra -Werror
-DEBUG = -g -fsanitize=address
+DEBUG = -g #-fsanitize=address
 CPPFLAGS = _GNU_SOURCE
 LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
