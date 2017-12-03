@@ -1,0 +1,22 @@
+# Documentation
+To open the project's documentation please use:
+> make doc
+
+Note that you can choose in which browser open the documentation.
+The following will open it in firefox.
+> BROWSER=firefox make doc
+
+The default BROWSER is chromium.
+
+# How to launch the game
+## Compile it
+Both commands work.
+> make
+> make all
+
+## Run the game
+In the root directory:
+> ./game
+
+# How to play
+TODO
