@@ -17,7 +17,7 @@ static struct pos get_entity_pos(struct entity *entity)
  */
 static int is_between(float x, float a, float b)
 {
-    return a < x && x < b;
+    return a <= x && x <= b;
 }
 
 static int is_touching_wall(struct map *map, struct entity *entity)
@@ -28,13 +28,13 @@ static int is_touching_wall(struct map *map, struct entity *entity)
     int posy;
     if (entity->dir == UP || entity->dir == DOWN)
     {
-        posx = pos.x;
-        posy = entity->dir == UP ? pos.y - 1 : pos.y + 2;
+        posx = floor(pos.x);
+        posy = floor(entity->dir == UP ? pos.y - 1 : pos.y + 2);
     }
     else
     {
-        posx = entity->dir == LEFT ? pos.x - 1 : pos.x + 1;
-        posy = pos.y;
+        posx = floor(entity->dir == LEFT ? pos.x - 1 : pos.x + 2);
+        posy = floor(pos.y);
     }
     return map->block_type[posy][posx] == ROCK
             && ((entity->dir == UP && is_between(entity->pos.y, pos.y,
@@ -65,10 +65,10 @@ void move_entity(struct game_state *gs)
                 entity->pos.y += 0.1;
                 break;
             case LEFT:
-                entity->pos.x -= 0.1;
+                entity->pos.x -= 0.01;
                 break;
             case RIGHT:
-                entity->pos.x += 0.1;
+                entity->pos.x += 0.01;
                 break;
             default:
                 break;
