@@ -22,16 +22,15 @@ static int is_between(float x, float a, float b)
 
 static int is_touching_wall(struct map *map, struct entity *entity)
 {
-    float epsilon = 0.1;
+    float epsilon = 0.2;
         struct pos pos = get_entity_pos(entity);
         int posx = pos.x;
-        int posy = pos.y;
-        posy = entity->dir == UP ? posy - 1 : posy + 1;
+        int posy = entity->dir == UP ? pos.y - 1 : pos.y + 2;
         return map->block_type[posy][posx] == ROCK
-                && ((entity->dir == UP && is_between(entity->pos.y, posy + 1,
-                    posy + 1 + epsilon))
+                && ((entity->dir == UP && is_between(entity->pos.y, pos.y,
+                    pos.y + epsilon))
                 || (entity->dir == DOWN && is_between(entity->pos.y,
-                    posy - epsilon, posy)));
+                    pos.y + 1 - epsilon, pos.y + 1)));
 }
 
 void move_entity(struct game_state *gs)
@@ -47,7 +46,6 @@ void move_entity(struct game_state *gs)
         else
         {
             entity->dir = entity->dir == UP ? DOWN : UP;
-            printf("LOG: touched wall\n");
         }
     }
 }
