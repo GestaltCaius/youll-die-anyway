@@ -107,7 +107,7 @@ bool init_window(struct game_state *gs)
     gs->win->textures->end =
         loadTexture("src/ressource/png_texture/end.png",gs);
      gs->win->textures->life =
-        loadTexture("src/ressource/png_texture/groomf.png",gs);   
+        loadTexture("src/ressource/png_texture/cross.png",gs);   
  
     gs->win->music_bg = Mix_LoadMUS( "src/ressource/nicemusic.wav" );
     if( gs->win->music_bg  == NULL )
