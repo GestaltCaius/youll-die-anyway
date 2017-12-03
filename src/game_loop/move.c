@@ -31,9 +31,9 @@ void jump(struct game_state *game_state,
             && (floor_x == posx
             || map->block_type[floor_y][floor_x + 1] != ROCK))
         {
-            player->jump -= GRAVITY;
             entity->pos.y -= GRAVITY;
         }
+        player->jump -= GRAVITY;
     }
 }
 

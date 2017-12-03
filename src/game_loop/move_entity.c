@@ -29,22 +29,22 @@ static int is_touching_wall(struct map *map, struct entity *entity)
     if (entity->dir == UP || entity->dir == DOWN)
     {
         posx = floor(pos.x);
-        posy = floor(entity->dir == UP ? pos.y - 1 : pos.y + 2);
+        posy = floor(entity->dir == UP ? pos.y - 1 : pos.y + 1);
     }
     else
     {
-        posx = floor(entity->dir == LEFT ? pos.x - 1 : pos.x + 2);
+        posx = floor(entity->dir == LEFT ? pos.x - 1 : pos.x + 1);
         posy = floor(pos.y);
     }
     return map->block_type[posy][posx] == ROCK
             && ((entity->dir == UP && is_between(entity->pos.y, pos.y,
                 pos.y + epsilon))
-            || (entity->dir == DOWN && is_between(entity->pos.y,
-                pos.y + 1 - epsilon, pos.y + 1))
+            || (entity->dir == DOWN && is_between(entity->pos.y + 1,
+                pos.y + 1 - epsilon, pos.y + 1 + epsilon))
             || (entity->dir == LEFT && is_between(entity->pos.x,
                 pos.x, pos.x + epsilon))
-            || (entity->dir == RIGHT && is_between(entity->pos.x,
-                pos.x + 1 - epsilon, pos.x + 1)));
+            || (entity->dir == RIGHT && is_between(entity->pos.x + 1,
+                pos.x + 1 - epsilon, pos.x + 1 + epsilon)));
 }
 
 void move_entity(struct game_state *gs)
