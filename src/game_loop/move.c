@@ -121,6 +121,33 @@ void player_die(struct game_state *gs)
     }
 }
 
+int player_end(struct game_state *gs)
+{
+    struct entity *player = gs->player->entity;
+    if(player->pos.x >= gs->end_pos.x
+        && player->pos.x <= gs->end_pos.x + 1
+        && player->pos.y >= gs->end_pos.y
+        && player->pos.y <= gs->end_pos.y + 1)
+        return 0;
+    if(player->pos.x + 1 >= gs->end_pos.x
+        && player->pos.x + 1 <= gs->end_pos.x + 1
+        && player->pos.y >= gs->end_pos.y
+        && player->pos.y <= gs->end_pos.y + 1)
+        return 0;
+    if(player->pos.x >= gs->end_pos.x
+        && player->pos.x <= gs->end_pos.x + 1
+        && player->pos.y + 1 >= gs->end_pos.y
+        && player->pos.y + 1 <= gs->end_pos.y + 1)
+        return 0;
+    if(player->pos.x + 1 >= gs->end_pos.x
+        && player->pos.x + 1 <= gs->end_pos.x + 1
+        && player->pos.y + 1 >= gs->end_pos.y
+        && player->pos.y + 1 <= gs->end_pos.y + 1)
+        return 0;
+    return 1;
+
+}
+
 void game_move(struct game_state *game_state)
 {
     for (struct entity_list *list = game_state->list; list; list = list->next)
@@ -140,4 +167,6 @@ void game_move(struct game_state *game_state)
     player_move(game_state);
     move_entity(game_state);
     player_die(game_state);
+    if(player_end(game_state) == 0)
+        printf("end\n");
 }
