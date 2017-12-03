@@ -3,8 +3,8 @@
 static char **get_maps_array(void)
 {
     char **map_files = malloc(sizeof(char*) * (MAPS + 1));
-    map_files[0] = "tests/maps/level0.map";
-    map_files[1] = "tests/maps/level1.map";
+    map_files[0] = "tests/maps/level1.map";
+    map_files[1] = "tests/maps/level2.map";
     map_files[2] = NULL;
     return map_files;
 }

@@ -168,5 +168,5 @@ void game_move(struct game_state *game_state)
     move_entity(game_state);
     player_die(game_state);
     if(player_end(game_state) == 0)
-        printf("end\n");
+        load_next_map(game_state);
 }

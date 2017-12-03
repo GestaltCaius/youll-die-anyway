@@ -1,13 +1,13 @@
 #include "load_map.h"
 
-struct game_state *load_map_get_state(char *filename)
+struct game_state *load_map_get_state(void)
 {
     // init game state
     struct game_state *game_state = game_state_create();
     if (!game_state)
         return NULL;
     // parse .map file
-    if (parser(filename, game_state) < 0)
+    if (parser(game_state->map_files[0], game_state) < 0)
     {
         game_state_destroy(game_state);
         return NULL;

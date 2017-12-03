@@ -1,10 +1,8 @@
 #include "game_main.h"
 
-int main(int argc, char* argv[])
+int main(void)
 {
-    if (argc < 2)
-        return -1;
-    struct game_state *game_state = load_map_get_state(argv[1]);
+    struct game_state *game_state = load_map_get_state();
     if (!game_state)
         return -1;
     bool menu = true;

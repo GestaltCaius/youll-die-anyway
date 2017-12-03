@@ -6,6 +6,7 @@
 
 #include <math.h>
 #include "game_state.h"
+#include "load_map.h"
 
 void game_move(struct game_state *game_state);
 void move_entity(struct game_state *gs);

@@ -9,7 +9,7 @@
  * @param  filename [description]
  * @return          NULL on error
  */
-struct game_state *load_map_get_state(char *filename);
+struct game_state *load_map_get_state(void);
 
 /**
  * [load_next_map description]
