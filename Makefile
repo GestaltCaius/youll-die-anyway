@@ -13,7 +13,7 @@ OBJ = $(SRC:.c=.o)
 BIN = youlldie
 BROWSER = chromium
 
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := check
 .PHONY: all clean check doc
 
 all: $(SRC)
@@ -29,3 +29,4 @@ doc:
 
 check: $(SRC)
 	$(CC) $(INCLUDES) -D$(CPPFLAGS) $(CFLAGS) $(DEBUG) $(SRC) -o ${BIN} $(LDFLAGS)
+	./$(BIN)
