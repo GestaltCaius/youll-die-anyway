@@ -52,6 +52,30 @@ void window_render_map(struct game_state *gs)
     }
 }
 
+void render_live(struct game_state *gs)
+{
+    int count = gs->player->score;
+    SDL_Rect block;
+    for (size_t x = 0; count > 0 && x < SCREEN_WIDTH / BLOCK_SIZE; x++)
+    {
+        for (size_t y = 0; count > 0 && y < SCREEN_HEIGHT / BLOCK_SIZE; y++)
+        {
+            if(x == 0 && y < 4)
+                continue;
+            SDL_SetRenderTarget(gs->win->renderer,
+                    gs->win->textures->groomf);
+            block = SDL_RectCreate(y * BLOCK_SIZE,
+                    x * BLOCK_SIZE,BLOCK_SIZE, BLOCK_SIZE);
+
+            SDL_RenderCopy(gs->win->renderer,
+                    gs->win->textures->groomf,NULL,&block);           
+            count--;
+        }
+    }
+
+
+}
+
 void window_render_entity(struct game_state *gs)
 {
     struct entity_list * tmp = gs->list;
@@ -141,23 +165,23 @@ void text_display_game(struct game_state *gs)
         SDL_Surface * text1 = TTF_RenderText_Solid(gs->win->font,"Press Q to Quit"
                 ,color);
         text_quit = SDL_CreateTextureFromSurface(gs->win->renderer,text1);
-        rect_quit.x =  0;
-        rect_quit.y = SCREEN_HEIGHT * 5 / 6 ;
-        rect_quit.w = 250;
-        rect_quit.h = 50;
-
     }
-    rect_quit.x = 0;
+    rect_quit.x =  0;
+    rect_quit.y = 950 ;
+    rect_quit.w = 250;
+    rect_quit.h = 50;
     SDL_RenderCopy(gs->win->renderer,text_quit,NULL,&rect_quit);
     if(!text_live)
     {
-        SDL_Color color = { 255, 0, 255, 0 };
-        SDL_Surface * text2 = TTF_RenderText_Solid(gs->win->font,"Live : 0"
-                ,color);
+        SDL_Color color = { 0, 255, 0 , 0 };
+        SDL_Surface * text2 = TTF_RenderText_Solid(gs->win->font,"Death",color);
         text_live = SDL_CreateTextureFromSurface(gs->win->renderer,text2);
         rect_quit.x +=  300;
     }
-    rect_quit.x +=  300;
+    rect_quit.x =  10;
+    rect_quit.y = 10 ;
+    rect_quit.w = 100;
+    rect_quit.h = 25;
     SDL_RenderCopy(gs->win->renderer,text_live,NULL,&rect_quit);
     if(!text_timer)
     {
@@ -167,7 +191,10 @@ void text_display_game(struct game_state *gs)
         text_timer = SDL_CreateTextureFromSurface(gs->win->renderer,text3);
         rect_quit.x +=  300;
     }
-    rect_quit.x +=  300;
+    rect_quit.x =  600;
+    rect_quit.y = 950 ;
+    rect_quit.w = 250;
+    rect_quit.h = 50;
     SDL_RenderCopy(gs->win->renderer,text_timer,NULL,&rect_quit);
     //  SDL_DestroyTexture(texturetext);
     //  SDL_FreeSurface(text1);   
@@ -182,6 +209,7 @@ void game_window_draw(struct game_state *gs)
     //    text_display(gs,"live : 0 ", 300,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
     //    text_display(gs,"timer : 0 ", 600,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
     text_display_game(gs);
+    render_live(gs);
     window_render_entity(gs);
     window_render_player(gs);
 
