@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -std=c99 -pedantic -Wall -Wextra -Werror
 DEBUG = -g #-fsanitize=address
 CPPFLAGS = _GNU_SOURCE
-LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lm
 
 MODULES   = entities parser sdl game_loop
 SRC_DIR   = $(addprefix src/, $(MODULES))

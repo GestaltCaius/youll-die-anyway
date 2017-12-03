@@ -22,8 +22,8 @@ enum entity_type
 
 enum direction
 {
-    LEFT,
-    RIGHT,
+    LEFT = -1,
+    RIGHT = 1,
     UP,
     DOWN,
     IDLE

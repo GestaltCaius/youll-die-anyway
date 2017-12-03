@@ -4,6 +4,7 @@
 #define SPEED 0.1
 #define GRAVITY 0.1
 
+#include <math.h>
 #include "game_state.h"
 
 void game_move(struct game_state *game_state);
