@@ -69,7 +69,9 @@ bool init_window(struct game_state *gs)
     }
     
     TTF_Init();
-    gs->win->font = TTF_OpenFont("src/ressource/stocky.ttf",20);
+    gs->win->font = TTF_OpenFont("src/ressource/stocky.ttf", 30);
+    if(!gs->win->font)
+        printf("error loading font\n");
         
     // initialization texture
     gs->win->textures->background =
