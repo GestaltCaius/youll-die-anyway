@@ -4,7 +4,6 @@ void game_events(struct game_state *game_state)
 {
     SDL_Event e;
     SDL_PollEvent(&e);
-    SDL_Delay(10);
     if(e.type == SDL_KEYDOWN)
     {
         switch(e.key.keysym.sym)

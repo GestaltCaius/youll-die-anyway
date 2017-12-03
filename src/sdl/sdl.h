@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "game_state.h"
 #include "parser.h"

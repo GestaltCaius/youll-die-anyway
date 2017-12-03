@@ -9,6 +9,7 @@ int main(int argc, char* argv[])
         return -1;
     while(!game_state->quit)
     {
+        SDL_Delay(25);
         game_events(game_state);
         game_move(game_state);
         game_window_draw(game_state);
