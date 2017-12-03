@@ -34,6 +34,7 @@ void close_sdl(struct game_state *gs)
     Mix_FreeChunk(gs->win->die);
     Mix_FreeChunk(gs->win->enemy);
     Mix_FreeChunk(gs->win->stone_fall);
+    Mix_FreeChunk(gs->win->pike);
 
     SDL_DestroyRenderer(gs->win->renderer);
     SDL_DestroyWindow(gs->win->window);
@@ -102,7 +103,7 @@ bool init_window(struct game_state *gs)
     gs->win->textures->spike =
         loadTexture("src/ressource/png_texture/spike.png",gs);
     gs->win->textures->end =
-        loadTexture("src/ressource/png_texture/groomf.png",gs);
+        loadTexture("src/ressource/png_texture/end.png",gs);
      gs->win->textures->life =
         loadTexture("src/ressource/png_texture/groomf.png",gs);   
  
@@ -113,7 +114,10 @@ bool init_window(struct game_state *gs)
     }
     gs->win->music_bg2 = Mix_LoadMUS( "src/ressource/othernicemusic.wav" );
     gs->win->jump = Mix_LoadWAV("src/ressource/jump.wav");
-
+    gs->win->die = Mix_LoadWAV("src/ressource/die.wav");
+    gs->win->enemy = Mix_LoadWAV("src/ressource/stone_fallr.wav");
+    gs->win->stone_fall = Mix_LoadWAV("src/ressource/stone_fall.wav");
+    gs->win->pike = Mix_LoadWAV("src/ressource/fall.wav");
     return true;
 }
 

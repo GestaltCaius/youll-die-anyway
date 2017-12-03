@@ -116,6 +116,7 @@ void player_die(struct game_state *gs)
             player->entity->pos.x = player->start.x;
             player->entity->pos.y = player->start.y;
             player->score++;
+            Mix_PlayChannel(-1,gs->win->stone_fall,0);
         }
     }
 }

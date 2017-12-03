@@ -38,6 +38,7 @@ struct mywindow
     Mix_Chunk *die;
     Mix_Chunk *enemy;
     Mix_Chunk *stone_fall;
+    Mix_Chunk *pike;
 
 
 };
