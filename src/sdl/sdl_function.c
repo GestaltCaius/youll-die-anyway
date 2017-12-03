@@ -22,13 +22,22 @@ void close_sdl(struct game_state *gs)
     SDL_DestroyTexture(gs->win->textures->groomf);
     SDL_DestroyTexture(gs->win->textures->spike);
     SDL_DestroyTexture(gs->win->textures->rock);
-    
+
     TTF_CloseFont(gs->win->font);
     TTF_Quit();
 
+    Mix_FreeMusic(gs->win->music_bg);
+    Mix_FreeMusic(gs->win->music_bg2);
+    Mix_FreeChunk(gs->win->move);
+    Mix_FreeChunk(gs->win->jump);
+    Mix_FreeChunk(gs->win->die);
+    Mix_FreeChunk(gs->win->enemy);
+    Mix_FreeChunk(gs->win->stone_fall);
 
     SDL_DestroyRenderer(gs->win->renderer);
     SDL_DestroyWindow(gs->win->window);
+    Mix_Quit();
+    IMG_Quit();
     SDL_Quit();
     free(gs->win->textures);
     free(gs->win);
@@ -36,7 +45,7 @@ void close_sdl(struct game_state *gs)
 
 bool init_window(struct game_state *gs)
 {
-    if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+    if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0 )
     {
         printf( "Error SDL init! SDL_Error: %s\n", SDL_GetError() );
         return false;
@@ -66,26 +75,41 @@ bool init_window(struct game_state *gs)
                     IMG_GetError() );
             return false;
         }
+
+        if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+        {
+            printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+        }
     }
-    
+
     TTF_Init();
     gs->win->font = TTF_OpenFont("src/ressource/beauty.ttf", 1000);
     if(!gs->win->font)
         printf("error loading font\n");
-        
+
     // initialization texture
     gs->win->textures->background =
-    loadTexture("src/ressource/png_texture/background.png",gs);
+        loadTexture("src/ressource/png_texture/background.png",gs);
     gs->win->textures->stone =
-    loadTexture("src/ressource/png_texture/stone.png",gs);
+        loadTexture("src/ressource/png_texture/stone.png",gs);
     gs->win->textures->hero =
-    loadTexture("src/ressource/png_texture/hero.png",gs);
+        loadTexture("src/ressource/png_texture/hero.png",gs);
     gs->win->textures->rock =
-    loadTexture("src/ressource/png_texture/rock.png",gs);
+        loadTexture("src/ressource/png_texture/rock.png",gs);
     gs->win->textures->groomf =
-    loadTexture("src/ressource/png_texture/groomf.png",gs);
+        loadTexture("src/ressource/png_texture/groomf.png",gs);
     gs->win->textures->spike =
-    loadTexture("src/ressource/png_texture/spike.png",gs);
+        loadTexture("src/ressource/png_texture/spike.png",gs);
+
+    
+    gs->win->music_bg = Mix_LoadMUS( "src/ressource/nicemusic.wav" );
+    if( gs->win->music_bg  == NULL )
+    {
+        printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+    }
+    gs->win->music_bg2 = Mix_LoadMUS( "src/ressource/othernicemusic.wav" );
+    gs->win->jump = Mix_LoadWAV("src/ressource/jump.wav");
+
     return true;
 }
 
@@ -96,7 +120,7 @@ SDL_Texture* loadTexture( char* path,struct game_state *gs )
     if( loadedSurface == NULL )
     {
         printf( "Unable to load image %s! SDL_image Error: %s\n", path,
-            IMG_GetError() );
+                IMG_GetError() );
     }
     else
     {
@@ -104,7 +128,7 @@ SDL_Texture* loadTexture( char* path,struct game_state *gs )
         if( newTexture == NULL )
         {
             printf( "Unable to create texture from %s! SDL Error: %s\n", path,
-                SDL_GetError() );
+                    SDL_GetError() );
         }
         SDL_FreeSurface( loadedSurface );
     }
@@ -113,33 +137,33 @@ SDL_Texture* loadTexture( char* path,struct game_state *gs )
 
 
 /*
-void modif_window()
-{
-    w->window_surface= SDL_GetWindowSurface( w->window );
-    SDL_FillRect( w->window_surface, NULL,
-            SDL_MapRGB( w->window_surface->format, 60, 60, 60 ) );
-    SDL_UpdateWindowSurface( w->window );
-}
+   void modif_window()
+   {
+   w->window_surface= SDL_GetWindowSurface( w->window );
+   SDL_FillRect( w->window_surface, NULL,
+   SDL_MapRGB( w->window_surface->format, 60, 60, 60 ) );
+   SDL_UpdateWindowSurface( w->window );
+   }
 
-bool load_bg(void)
-{
-    bool returnV = true;
+   bool load_bg(void)
+   {
+   bool returnV = true;
 
-    SDL_Surface * tmp  = IMG_Load("../ressource/background.png");
-    if( tmp == NULL )
-    {
-        printf( "Unable to load bg image! SDL Error: %s\n", SDL_GetError() );
-        returnV = false;
-    }
-    w->bg_surface = SDL_ConvertSurface(tmp,w->window_surface->format, 0);
-    SDL_Rect stretchRect;
-    stretchRect.x = 0;
-    stretchRect.y = 0;
-    stretchRect.w = SCREEN_WIDTH;
-    stretchRect.h = SCREEN_HEIGHT;
-    SDL_BlitSurface( w->bg_surface, NULL, w->window_surface, &stretchRect );
-    SDL_UpdateWindowSurface(w->window);
-    SDL_FreeSurface(tmp);
-    return returnV;
-}
-*/
+   SDL_Surface * tmp  = IMG_Load("../ressource/background.png");
+   if( tmp == NULL )
+   {
+   printf( "Unable to load bg image! SDL Error: %s\n", SDL_GetError() );
+   returnV = false;
+   }
+   w->bg_surface = SDL_ConvertSurface(tmp,w->window_surface->format, 0);
+   SDL_Rect stretchRect;
+   stretchRect.x = 0;
+   stretchRect.y = 0;
+   stretchRect.w = SCREEN_WIDTH;
+   stretchRect.h = SCREEN_HEIGHT;
+   SDL_BlitSurface( w->bg_surface, NULL, w->window_surface, &stretchRect );
+   SDL_UpdateWindowSurface(w->window);
+   SDL_FreeSurface(tmp);
+   return returnV;
+   }
+ */

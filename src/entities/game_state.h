@@ -29,6 +29,14 @@ struct mywindow
     SDL_Renderer * renderer;
     struct textures *textures;
     TTF_Font * font;
+    Mix_Music *music_bg;
+    Mix_Music *music_bg2;
+    Mix_Chunk *move;
+    Mix_Chunk *jump;
+    Mix_Chunk *die;
+    Mix_Chunk *enemy;
+    Mix_Chunk *stone_fall;
+
 
 };
 
