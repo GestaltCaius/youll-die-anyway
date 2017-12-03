@@ -25,6 +25,9 @@ enum block_type
     END
 };
 
+/**
+ ** @brief map structure, translation of the .map file
+ */
 struct map
 {
     int width;

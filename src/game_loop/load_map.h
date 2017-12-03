@@ -2,7 +2,7 @@
 #define LOAD_MAP_H
 /**
  ** @file load_map.h
- ** @brief 
+ ** @brief map file loader, creating/updating game_state structure
  ** @author Rod Guillaume
  ** @version 1.0
  ** @date 2017-12-03

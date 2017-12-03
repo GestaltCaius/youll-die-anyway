@@ -3,7 +3,7 @@
 
 /**
 ** @file sdl.h
-** @brief 
+** @brief SDL Window functions
 ** @author Nicolas Ribeyrolle
 ** @version 1.0
 ** @date 2017-12-03
