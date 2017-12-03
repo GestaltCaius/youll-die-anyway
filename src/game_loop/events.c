@@ -4,7 +4,8 @@ static int is_on_ground(struct game_state *gs)
 {
     int posy = gs->player->entity->pos.y;
     int posx = gs->player->entity->pos.x;
-    return gs->map->block_type[posy + 1][posx] == ROCK;
+    return gs->map->block_type[posy + 1][posx] == ROCK
+            || gs->map->block_type[posy + 1][posx + 1] == ROCK;
 }
 
 void game_events(struct game_state *game_state)

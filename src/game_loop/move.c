@@ -1,5 +1,64 @@
 #include "move.h"
 
+void gravity(struct game_state *game_state,
+    struct entity *entity, float posx, float posy)
+{
+    struct map *map = game_state->map;
+    struct player *player = game_state->player;
+    int floor_x = floor(posx);
+    int floor_y = floor(posy);
+    if(floor_y != posy
+        || (floor_x == posx && map->block_type[floor_y + 1][floor_x] != ROCK)
+        || (floor_x != posx
+            && map->block_type[floor_y + 1][floor_x] != ROCK
+            && map->block_type[floor_y + 1][floor_x + 1] != ROCK))
+    {
+        if(player->jump == 0)
+            entity->pos.y += GRAVITY;
+    }
+}
+
+void jump(struct game_state *game_state,
+    struct entity *entity, float posx, float posy)
+{
+    struct map *map = game_state->map;
+    struct player *player = game_state->player;
+    int floor_x = floor(posx);
+    int floor_y = floor(posy);
+    if(player->jump != 0)
+    {
+        if(map->block_type[floor_y][floor_x] != ROCK
+            && (floor_x == posx
+            || map->block_type[floor_y][floor_x + 1] != ROCK))
+        {
+            player->jump -= GRAVITY;
+            entity->pos.y -= GRAVITY;
+        }
+    }
+}
+
+void h_move(struct game_state *game_state,
+    struct entity *entity, float posx, float posy)
+{
+    struct map *map = game_state->map;
+    int floor_x = floor(posx);
+    int floor_y = floor(posy);
+    if(posx > 0 && posx < map->width
+        && map->block_type[floor_y][floor_x] != ROCK)
+    {
+        if(floor_x == posx && floor_y == posy)
+            entity->pos.x = posx;
+        else if(floor_x == posx && floor_y != posy
+            && map->block_type[floor_y + 1][floor_x] != ROCK)
+            entity->pos.x = posx;
+        else if(floor_x != posx && floor_y == posy
+            && map->block_type[floor_y][floor_x + 1] != ROCK)
+            entity->pos.x = posx;
+        else if(floor_x != posx && floor_y != posy
+            && map->block_type[floor_y + 1][floor_x + 1] != ROCK)
+            entity->pos.x = posx;
+    }
+}
 
 void player_move(struct game_state *game_state)
 {
@@ -16,32 +75,9 @@ void player_move(struct game_state *game_state)
         default:
             break;
     }
-    float posx = player->pos.x + SPEED * xspeed;
-    float posy = player->pos.y;
-    int floor_posx = floor(posx);
-    int floor_posy = floor(posy);
-    struct map *map = game_state->map;
-    if((map->block_type[floor_posy + 1][floor_posx] != ROCK
-        || posy != floor_posy) && game_state->player->jump == 0)
-    {
-        player->pos.y = posy + GRAVITY;
-        posy = player->pos.y;
-        floor_posy = floor(posy);
-    }
-    if (game_state->player->jump
-        && (map->block_type[floor_posy - 1][floor_posx] != ROCK))
-    {
-        player->pos.y -= GRAVITY;
-        game_state->player->jump -= GRAVITY;
-        posy = player->pos.y;
-        floor_posy = floor(posy);
-    }
-    if (posx > 0 && map->block_type[floor_posy][floor_posx - 1] != ROCK
-        && posx + 1 < map->width
-        && map->block_type[floor_posy][floor_posx + 1] != ROCK)
-    {
-        player->pos.x = posx;
-    }
+    gravity(game_state, player, player->pos.x, player->pos.y);
+    jump(game_state, player, player->pos.x, player->pos.y);
+    h_move(game_state, player, player->pos.x + SPEED * xspeed, player->pos.y);
 }
 
 void game_move(struct game_state *game_state)
