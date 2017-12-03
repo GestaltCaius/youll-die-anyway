@@ -54,7 +54,8 @@ bool init_window(struct game_state *gs)
     }
     else
     {
-        gs->win->window = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED,
+        gs->win->window = SDL_CreateWindow( "SDL Tutorial", 
+                SDL_WINDOWPOS_UNDEFINED,
                 SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
                 SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
         if( gs->win->window == NULL )
@@ -80,7 +81,8 @@ bool init_window(struct game_state *gs)
 
         if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
         {
-            printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+            printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n",
+                    Mix_GetError() );
         }
     }
 
@@ -110,7 +112,8 @@ bool init_window(struct game_state *gs)
     gs->win->music_bg = Mix_LoadMUS( "src/ressource/nicemusic.wav" );
     if( gs->win->music_bg  == NULL )
     {
-        printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+        printf( "Failed to load beat music! SDL_mixer Error: %s\n",
+            Mix_GetError() );
     }
     gs->win->music_bg2 = Mix_LoadMUS( "src/ressource/othernicemusic.wav" );
     gs->win->jump = Mix_LoadWAV("src/ressource/jump.wav");
@@ -132,7 +135,8 @@ SDL_Texture* loadTexture( char* path,struct game_state *gs )
     }
     else
     {
-        newTexture = SDL_CreateTextureFromSurface( gs->win->renderer, loadedSurface);
+        newTexture = SDL_CreateTextureFromSurface( gs->win->renderer,
+                loadedSurface);
         if( newTexture == NULL )
         {
             printf( "Unable to create texture from %s! SDL Error: %s\n", path,
@@ -143,35 +147,3 @@ SDL_Texture* loadTexture( char* path,struct game_state *gs )
     return newTexture;
 }
 
-
-/*
-   void modif_window()
-   {
-   w->window_surface= SDL_GetWindowSurface( w->window );
-   SDL_FillRect( w->window_surface, NULL,
-   SDL_MapRGB( w->window_surface->format, 60, 60, 60 ) );
-   SDL_UpdateWindowSurface( w->window );
-   }
-
-   bool load_bg(void)
-   {
-   bool returnV = true;
-
-   SDL_Surface * tmp  = IMG_Load("../ressource/background.png");
-   if( tmp == NULL )
-   {
-   printf( "Unable to load bg image! SDL Error: %s\n", SDL_GetError() );
-   returnV = false;
-   }
-   w->bg_surface = SDL_ConvertSurface(tmp,w->window_surface->format, 0);
-   SDL_Rect stretchRect;
-   stretchRect.x = 0;
-   stretchRect.y = 0;
-   stretchRect.w = SCREEN_WIDTH;
-   stretchRect.h = SCREEN_HEIGHT;
-   SDL_BlitSurface( w->bg_surface, NULL, w->window_surface, &stretchRect );
-   SDL_UpdateWindowSurface(w->window);
-   SDL_FreeSurface(tmp);
-   return returnV;
-   }
- */
