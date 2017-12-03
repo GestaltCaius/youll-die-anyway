@@ -20,7 +20,7 @@
 #include "entity.h"
 #include "list.h"
 
-#define MAPS 2
+#define MAPS 10
 
 /**
 ** @brief Game object textures

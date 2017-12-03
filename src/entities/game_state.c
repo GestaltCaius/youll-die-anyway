@@ -5,7 +5,15 @@ static char **get_maps_array(void)
     char **map_files = malloc(sizeof(char*) * (MAPS + 1));
     map_files[0] = "tests/maps/level1.map";
     map_files[1] = "tests/maps/level2.map";
-    map_files[2] = NULL;
+    map_files[2] = "tests/maps/level3.map";
+    map_files[3] = "tests/maps/level4.map";
+    map_files[4] = "tests/maps/level5.map";
+    map_files[5] = "tests/maps/level6.map";
+    map_files[6] = "tests/maps/level7.map";
+    map_files[7] = "tests/maps/level8.map";
+    map_files[8] = "tests/maps/level9.map";
+    map_files[9] = "tests/maps/level10.map";
+    map_files[10] = NULL;
     return map_files;
 }
 
