@@ -12,7 +12,11 @@ enum block_type get_block_type(char type, struct pos pos,
     else if (type == 'G')
         list_add(game_state->list, pos, GROOMF);
     else if (type == 'P')
+    {
+        if (game_state->player)
+            player_destroy(game_state->player);
         game_state->player = player_create(pos);
+    }
     else if (type == 'E')
     {
         game_state->end_pos.x = pos.x;
@@ -44,8 +48,8 @@ int parser(char *map_name, struct game_state *game_state)
                                                 game_state);
         }
     }
-    if(game_state->map)
-        free(game_state->map);
+    if (game_state->map)
+        map_destroy(game_state->map);
     game_state->map = map;
     return 1;
 }

@@ -21,6 +21,7 @@ struct map
 {
     int width;
     int height;
+    int id;
     enum block_type **block_type;
 };
 
@@ -34,5 +35,8 @@ struct map
  ** @return .map file translated into a map structure
  */
 int parser(char *map_name, struct game_state *game_state);
+
+// TODO
+void map_destroy(struct map *map);
 
 #endif

@@ -11,6 +11,8 @@
 #include "entity.h"
 #include "list.h"
 
+#define MAPS 2
+
 struct textures
 {
     SDL_Texture *background;
@@ -49,7 +51,9 @@ struct game_state
     struct entity_list *list;
     struct pos end_pos;
     struct map *map;
+    char **map_files;
     struct mywindow *win;
+    bool game_won;
     bool quit;
     bool restart;
 };
