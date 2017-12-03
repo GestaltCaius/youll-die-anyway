@@ -1,18 +1,30 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
-#include <stdlib.h>
+/**
+** @file game_state.h
+** @brief Game environment structure, containing all game loop info
+** @author Rod Guillaume
+** @version 1.0
+** @date 2017-12-03
+*/
+
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "entity.h"
 #include "list.h"
 
 #define MAPS 2
 
+/**
+** @brief Game object textures
+*/
 struct textures
 {
     SDL_Texture *background;
@@ -25,6 +37,9 @@ struct textures
     SDL_Texture *life;
 };
 
+/**
+** @brief SDL Window structure containing textures, SDL info and audio
+*/
 struct mywindow
 {
     SDL_Window * window;
@@ -45,6 +60,9 @@ struct mywindow
 
 };
 
+/**
+** @brief Main game structure
+*/
 struct game_state
 {
     struct player *player;
@@ -62,8 +80,14 @@ struct game_state
 
 #include "sdl.h"
 
+/**
+** @brief game_state constructor
+*/
 struct game_state *game_state_create(void);
 
+/**
+** @brief game_state destructor
+*/
 void game_state_destroy(struct game_state *game_state);
 
-#endif /* GAME_STATE_H */
+#endif /* GAME_STATE_H*/

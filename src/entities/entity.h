@@ -2,12 +2,12 @@
 #define ENTITY_H
 
 /**
- ** @file entity.h
- ** @brief Game entity structures
- ** @author Rod Guillaume
- ** @version 1.0
- ** @date 2017-12-02
- */
+** @file entity.h
+** @brief Game entity structures
+** @author Rod Guillaume
+** @version 1.0
+** @date 2017-12-02
+*/
 
 #include <stdlib.h>
 #include "util.h"
@@ -20,6 +20,9 @@ enum entity_type
     PLAYER
 };
 
+/**
+** @brief Entity movement for game_move function
+*/
 enum direction
 {
     LEFT = -1,
@@ -29,6 +32,9 @@ enum direction
     IDLE
 };
 
+/**
+** @brief Game object structure
+*/
 struct entity
 {
     struct pos pos;
@@ -37,6 +43,9 @@ struct entity
     enum direction dir;
 };
 
+/**
+** @brief player related information and its entity field
+*/
 struct player
 {
     struct entity *entity;
@@ -45,27 +54,27 @@ struct player
 };
 
 /**
- ** @brief Entity constructor
- ** @return new entity or NULL on error
- */
+** @brief Entity constructor
+** @return new entity or NULL on error
+*/
 struct entity *entity_create(struct pos pos, enum entity_type type);
 
 /**
- ** @brief Entity destructor
+** @brief Entity destructor
  **
- ** @param entity to destroy
- */
+** @param entity to destroy
+*/
 void entity_destroy(struct entity *entity);
 
 /**
- ** @brief Player constructor
- ** @return new player or NULL on error
- */
+** @brief Player constructor
+** @return new player or NULL on error
+*/
 struct player *player_create(struct pos pos);
 
 /**
- ** @brief Player destructor
- */
+** @brief Player destructor
+*/
 void player_destroy(struct player *player);
 
-#endif /* ENTITY_H */
+#endif /* ENTITY_H*/
