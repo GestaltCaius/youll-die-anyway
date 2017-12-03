@@ -1,0 +1,33 @@
+# LEGEND
+[X] done
+[~] doing
+[ ] to do
+
+# ENTITIES
+    [X] Player and monsters structures
+    [X] Structure containing all game info
+        [X] Monster list
+
+# PARSER
+    [] .map parser into map structure
+
+# GAME LOOP
+    [] move
+        [] move player
+            [] left right
+            [] jump
+        [] move entities
+        [] detect movement boundaries (walls, etc.)
+    [] events
+    [] main
+    [] load map (integrating entities and parser)
+
+# SDL
+    [X] load textures
+    [~] display map
+    [] menus
+        [] pause
+        [] start
+        [] death
+    [] death counter
+    [] time counter
