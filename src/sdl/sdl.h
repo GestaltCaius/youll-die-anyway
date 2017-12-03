@@ -1,8 +1,8 @@
 #ifndef SDL_H
 #define SDL_H
 
-#define SCREEN_WIDTH  960
-#define SCREEN_HEIGHT  960
+#define SCREEN_WIDTH  1024
+#define SCREEN_HEIGHT  1024
 #define BLOCK_SIZE 32
 
 #include <SDL2/SDL.h>

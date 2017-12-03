@@ -154,6 +154,13 @@ void menu_window(struct game_state *gs)
     text_display(gs,"Gobrunk",SCREEN_WIDTH / 4, 300,200,50,color);
     text_display(gs,"Nipica",SCREEN_WIDTH / 4,350,200,50,color);
 
+    color.g = 0;
+    color.r= 255;
+    text_display(gs,"To Quit -- q -- ",0,SCREEN_HEIGHT * 5 / 6 ,250,50,color);
+    
+    text_display(gs,"To Play -- SPACE -- ", 300 ,SCREEN_HEIGHT * 5 / 6 ,
+                    250,50,color);
+
     SDL_RenderPresent(gs->win-> renderer);  
 
     SDL_Event m;
