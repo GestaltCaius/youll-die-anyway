@@ -33,12 +33,23 @@ enum direction
 };
 
 /**
+**  @brief Hitbox object structure
+*/
+struct hitbox
+{
+    float x;
+    float y;
+    float size_x;
+    float size_y;
+};
+
+/**
 ** @brief Game object structure
 */
 struct entity
 {
     struct pos pos;
-    struct pos hitbox;
+    struct hitbox hitbox;
     enum entity_type type;
     enum direction dir;
 };

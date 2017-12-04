@@ -82,25 +82,29 @@ void player_move(struct game_state *game_state)
 
 int check_hitbox(struct entity *player, struct entity *entity)
 {
-    if(player->pos.x >= entity->pos.x
-        && player->pos.x <= entity->pos.x + entity->hitbox.x
-        && player->pos.y >= entity->pos.y
-        && player->pos.y <= entity->pos.y + entity->hitbox.y)
+    float player_pos_x = player->pos.x + player->hitbox.x;
+    float entity_pos_x = entity->pos.x + entity->hitbox.x;
+    float player_pos_y = player->pos.y + player->hitbox.y;
+    float entity_pos_y = entity->pos.y + entity->hitbox.y;
+    if(player_pos_x >= entity_pos_x
+        && player_pos_x <= entity_pos_x + entity->hitbox.size_x 
+        && player_pos_y >= entity_pos_y
+        && player_pos_y <= entity_pos_y + entity->hitbox.size_y)
         return 0;
-    if(player->pos.x + 1 >= entity->pos.x
-        && player->pos.x + 1 <= entity->pos.x + entity->hitbox.x
-        && player->pos.y >= entity->pos.y
-        && player->pos.y <= entity->pos.y + entity->hitbox.y)
+    if(player_pos_x + player->hitbox.size_x >= entity_pos_x
+        && player_pos_x + player->hitbox.size_x <= entity_pos_x + entity->hitbox.size_x
+        && player_pos_y >= entity_pos_y
+        && player_pos_y <= entity_pos_y + entity->hitbox.size_y)
         return 0;
-   if(player->pos.x >= entity->pos.x
-        && player->pos.x <= entity->pos.x + entity->hitbox.x
-        && player->pos.y + 1 >= entity->pos.y
-        && player->pos.y + 1<= entity->pos.y + entity->hitbox.y)
+    if(player_pos_x >= entity_pos_x
+        && player_pos_x <= entity_pos_x + entity->hitbox.size_x
+        && player_pos_y + player->hitbox.size_y >= entity_pos_y
+        && player_pos_y + player->hitbox.size_y <= entity_pos_y + entity->hitbox.size_y)
         return 0;
-   if(player->pos.x + 1 >= entity->pos.x
-        && player->pos.x + 1 <= entity->pos.x + entity->hitbox.x
-        && player->pos.y + 1 >= entity->pos.y
-        && player->pos.y + 1 <= entity->pos.y + entity->hitbox.y)
+    if(player_pos_x + player->hitbox.size_x >= entity_pos_x
+        && player_pos_x + player->hitbox.size_x <= entity_pos_x + entity->hitbox.size_x
+        && player_pos_y + player->hitbox.size_y >= entity_pos_y
+        && player_pos_y + player->hitbox.size_y <= entity_pos_y + entity->hitbox.size_y)
         return 0;
     return 1;
 }

@@ -1,29 +1,40 @@
 #include "entity.h"
 
-struct pos hitbox_create(enum entity_type type)
+struct hitbox hitbox_create(enum entity_type type)
 {
-    struct pos pos;
+    struct hitbox hitbox;
     if(type == GROOMF)
     {
-        pos.x = 0.25;
-        pos.y = 0.25;
+        hitbox.x = 0.1875;
+        hitbox.y = 0.4375;
+        hitbox.size_x = 0.625;
+        hitbox.size_y = 0.59375;
     }
     if(type == SPIKE)
     {
-        pos.x = 1;
-        pos.y = 1;
+        hitbox.x = 0;
+        hitbox.y = 0;
+        hitbox.size_x = 1;
+        hitbox.size_y = 1;
+
     }
     if(type == STONE)
     {
-        pos.x = 1;
-        pos.y = 1;
+        hitbox.x = 0.0625;
+        hitbox.y = 0.0625;
+        hitbox.size_x = 0.875;
+        hitbox.size_y = 0.875;
+
     }
     if(type == PLAYER)
     {
-        pos.x = 1;
-        pos.y = 1;
+        hitbox.x = 0.15625;
+        hitbox.y = 0.28125;
+        hitbox.size_x = 0.6875;
+        hitbox.size_y = 0.71875;
+
     }
-    return pos;
+    return hitbox;
 }
 
 struct entity *entity_create(struct pos pos, enum entity_type type)
