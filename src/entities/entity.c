@@ -13,9 +13,9 @@ struct hitbox hitbox_create(enum entity_type type)
     if(type == SPIKE)
     {
         hitbox.x = 0;
-        hitbox.y = 0;
+        hitbox.y = 0.875;
         hitbox.size_x = 1;
-        hitbox.size_y = 1;
+        hitbox.size_y = 0.125;
 
     }
     if(type == STONE)
