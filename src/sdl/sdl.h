@@ -10,7 +10,7 @@
 */
 
 
-#define SCREEN_WIDTH  1024
+#define SCREEN_WIDTH  1024 
 #define SCREEN_HEIGHT  1024
 #define BLOCK_SIZE 32
 

@@ -97,7 +97,7 @@ bool init_window(struct game_state *gs)
     gs->win->textures->stone =
         loadTexture("src/ressource/png_texture/stone.png",gs);
     gs->win->textures->hero =
-        loadTexture("src/ressource/png_texture/hero.png",gs);
+        loadTexture("src/ressource/png_texture/hero_christmas.png",gs);
     gs->win->textures->rock =
         loadTexture("src/ressource/png_texture/rock.png",gs);
     gs->win->textures->groomf =
